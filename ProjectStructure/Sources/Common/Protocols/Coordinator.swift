@@ -107,3 +107,7 @@ class AnyCoordinator: ObservableObject {
     }
     
 }
+
+protocol TestCoordinator: Equatable, Identifiable {
+    
+}

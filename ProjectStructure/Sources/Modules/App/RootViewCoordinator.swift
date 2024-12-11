@@ -8,21 +8,10 @@
 import Foundation
 
 extension RootView {
-    class Coordinator: BaseCoordinator, ObservableObject {
+    struct Coordinator: TestCoordinator {
+        var id = UUID()
         
-        enum Alert: BaseAlert {
-            var id: String {
-                return "\(self)"
-            }
-        }
-        
-        enum FullScreen: BaseFullScreen {
-            var id: String {
-                return "\(self)"
-            }
-        }
-        
-        enum Navigation: BaseNavigation {
+        enum Navigation: Identifiable {
             case home
             case setting
             
@@ -31,8 +20,6 @@ extension RootView {
             }
         }
         
-        @Published var alert: Alert?
-        @Published var fullScreen: FullScreen?
-        @Published var navigation: Navigation?
+        var navigation: Navigation?
     }
 }

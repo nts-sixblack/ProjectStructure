@@ -11,6 +11,8 @@ struct SettingView: View {
     
     @Environment(\.dismissLegacy) private var dismiss
     
+    @StateObject var viewModel = ViewModel()
+    
     var body: some View {
         VStack {
             Text("Setting View")

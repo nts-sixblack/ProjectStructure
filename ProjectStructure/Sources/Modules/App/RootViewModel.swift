@@ -9,27 +9,19 @@ import Foundation
 import SwiftUI
 
 extension RootView {
-    class ViewModel: BaseViewModel {
+    class ViewModel: ObservableObject {
         
-        @Published private var internalCoordinator: Coordinator
+        @Service(\.localStorageService)
+        private var localStorageService: LocalStorageService
         
-        var coordinator: Binding<Coordinator> {
-            Binding(
-                get: { self.internalCoordinator },
-                set: { self.internalCoordinator = $0 }
-            )
-        }
-        
-        init(coordinator: Coordinator) {
-            self.internalCoordinator = coordinator
-        }
+        @Published var coordinator = Coordinator()
         
         func openHomeView() {
-            coordinator.wrappedValue.navigation = .home
+            coordinator.navigation = .home
         }
         
         func openSettingView() {
-            coordinator.wrappedValue.navigation = .setting
+            coordinator.navigation = .setting
         }
     }
 }

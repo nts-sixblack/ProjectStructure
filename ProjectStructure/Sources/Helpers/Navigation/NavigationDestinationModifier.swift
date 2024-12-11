@@ -9,24 +9,55 @@ import Foundation
 import SwiftUI
 
 extension View {
-    public func navigationDestinationLegacy<Item: Identifiable, Destination: View>(
+    func navigation<Item, Destination: View>(
         item: Binding<Item?>,
-        @ViewBuilder destination: @escaping (Item) -> Destination
+        @ViewBuilder destination: (Item) -> Destination
     ) -> some View {
-        self.background(
-            NavigationLink(
-                destination: item.wrappedValue.map { destination($0) },
-                isActive: Binding(
-                    get: { item.wrappedValue != nil },
-                    set: { isActive in
-                        if !isActive {
-                            item.wrappedValue = nil
-                        }
-                    }
-                )
-            ) {
-                EmptyView()
+        let isActive = Binding(
+            get: { item.wrappedValue != nil },
+            set: { value in
+                if !value {
+                    item.wrappedValue = nil
+                }
             }
         )
+        return navigation(isActive: isActive) {
+            item.wrappedValue.map(destination)
+        }
     }
+
+    func navigation<Destination: View>(
+        isActive: Binding<Bool>,
+        @ViewBuilder destination: () -> Destination
+    ) -> some View {
+        overlay(
+            NavigationLink(
+                destination: isActive.wrappedValue ? destination() : nil,
+                isActive: isActive,
+                label: { EmptyView() }
+            )
+        )
+    }
+}
+
+extension NavigationLink {
+
+    init<T: Identifiable, D: View>(item: Binding<T?>,
+                                   @ViewBuilder destination: (T) -> D,
+                                   @ViewBuilder label: () -> Label) where Destination == D? {
+        let isActive = Binding(
+            get: { item.wrappedValue != nil },
+            set: { value in
+                if !value {
+                    item.wrappedValue = nil
+                }
+            }
+        )
+        self.init(
+            destination: item.wrappedValue.map(destination),
+            isActive: isActive,
+            label: label
+        )
+    }
+
 }

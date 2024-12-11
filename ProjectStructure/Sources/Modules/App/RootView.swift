@@ -11,14 +11,7 @@ import Combine
 
 struct RootView: View {
     
-    @StateObject private var coordinator: Coordinator
-    @StateObject private var viewModel: ViewModel
-    
-    init() {
-        let coordinator = Coordinator()
-        _viewModel = StateObject(wrappedValue: ViewModel(coordinator: coordinator))
-        _coordinator = StateObject(wrappedValue: coordinator)
-    }
+    @ObservedObject var viewModel: ViewModel
     
     var body: some View {
         NavigationStackConstructor {
@@ -40,8 +33,7 @@ struct RootView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.white)
-            
-            .navigationDestinationLegacy(item: $coordinator.navigation) { item in
+            .navigation(item: $viewModel.coordinator.navigation) { item in
                 switch item {
                 case .home: HomeView()
                 case .setting: SettingView()

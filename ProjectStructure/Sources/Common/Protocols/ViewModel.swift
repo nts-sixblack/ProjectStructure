@@ -11,5 +11,5 @@ import SwiftUI
 protocol BaseViewModel: ObservableObject {
     associatedtype CoordinatorType: BaseCoordinator
     
-    var coordinator: Binding<CoordinatorType> { get }
+    var coordinator: CoordinatorType { get }
 }

@@ -31,14 +31,7 @@ extension AppState {
 
 extension AppState {
     struct ViewRouting: Equatable {
-        var coordinator: AnyCoordinator? = nil
-        
-        static func ==(lhs: ViewRouting, rhs: ViewRouting) -> Bool {
-            return lhs.coordinator?.rawName == rhs.coordinator?.rawName
-            && lhs.coordinator?.alert == rhs.coordinator?.alert
-            && lhs.coordinator?.fullScreen == rhs.coordinator?.fullScreen
-            && lhs.coordinator?.navigation == rhs.coordinator?.navigation
-        }
+//        var coordinator = RootView.Coordinator()
     }
 }
 
