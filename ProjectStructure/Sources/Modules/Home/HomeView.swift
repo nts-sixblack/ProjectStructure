@@ -34,6 +34,13 @@ struct HomeView: View {
                 Text("Popup success")
             }
 
+            Button ("Login") {
+                viewModel.login()
+            }
+            
+            Button ("Get user data") {
+                viewModel.getUserData()
+            }
             
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

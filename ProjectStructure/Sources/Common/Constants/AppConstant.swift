@@ -8,5 +8,5 @@
 import Foundation
 
 struct AppConstant {
-    static let url = "https://jsonplaceholder.typicode.com/posts"
+    static let url = "https://dummyjson.com/"
 }
