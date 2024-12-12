@@ -10,7 +10,7 @@ import Foundation
 struct LoginRequest: Codable {
     let username: String
     let password: String
-    var expiresInMins: Int = 5
+    var expiresInMins: Int = 1
 }
 
 struct LoginResponse: Codable {

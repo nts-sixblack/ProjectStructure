@@ -14,17 +14,37 @@ protocol APIServiceProtocol {
 }
 
 class APIService: APIServiceProtocol {
-    private var session: Session
-    private var authenticator: OAuthAuthenticator
-    private var credential: OAuthCredential
+    
+    let session: Session = {
+        let configuration = URLSessionConfiguration.af.default
+        
+        // Config time out
+        configuration.timeoutIntervalForRequest = 30
+        configuration.waitsForConnectivity = true
+        
+        let interceptor = AuthInterceptor()
+        
+        // Cache
+        // Just using cache or config time out
+//        let responseCacher = ResponseCacher(behavior: .modify { _, response in
+//          let userInfo = ["date": Date()]
+//          return CachedURLResponse(
+//            response: response.response,
+//            data: response.data,
+//            userInfo: userInfo,
+//            storagePolicy: .allowed)
+//        })
+        
+        let networkLogger = GitNetworkLogger()
+        return Session(
+            configuration: configuration,
+            interceptor: interceptor,
+//            cachedResponseHandler: responseCacher,
+            eventMonitors: [networkLogger]
+        )
+    }()
     
     init() {
-        self.credential = OAuthCredential(accessToken: "a0",
-                                          refreshToken: "r0",
-                                          userID: "u0",
-                                          expiration: Date(timeIntervalSinceNow: 60 * 5))
-        self.authenticator = OAuthAuthenticator()
-        self.session = Session(configuration: .default, interceptor: AuthenticationInterceptor(authenticator: authenticator, credential: credential))
     }
     
     func login(_ login: LoginRequest, completion: @escaping (Result<LoginResponse, Error>) -> Void) {
@@ -37,17 +57,10 @@ class APIService: APIServiceProtocol {
                 case let .success(data):
                     do {
                         let loginResponse = try JSONDecoder().decode(LoginResponse.self, from: data)
-                        let accessToken = loginResponse.accessToken
-                        let refreshToken = loginResponse.refreshToken
-                        let userId = "\(loginResponse.id)"
-                        let expirationDate = Date(timeIntervalSinceNow: 60 * 1) // Token in 1 minutes
                         
-                        let newCredential = OAuthCredential(accessToken: accessToken,
-                                                            refreshToken: refreshToken,
-                                                            userID: userId,
-                                                            expiration: expirationDate)
-                        self.credential = newCredential
-                        self.session = Session(interceptor: AuthenticationInterceptor(authenticator: self.authenticator, credential: self.credential))
+                        TokenManager.shared.accessToken = loginResponse.accessToken
+                        TokenManager.shared.refreshToken = loginResponse.refreshToken
+                        
                         completion(.success(loginResponse))
                         
                     } catch {

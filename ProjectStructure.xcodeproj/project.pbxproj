@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF0761072D0B3C7000FD6223 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = AF0761062D0B3C7000FD6223 /* KeychainAccess */; };
 		AFCA56352D09BBD200212B4E /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = AFCA56342D09BBD200212B4E /* SwiftUIIntrospect */; };
 		AFCA56412D09C2EA00212B4E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AFCA56402D09C2EA00212B4E /* Alamofire */; };
 /* End PBXBuildFile section */
@@ -43,6 +44,7 @@
 			files = (
 				AFCA56352D09BBD200212B4E /* SwiftUIIntrospect in Frameworks */,
 				AFCA56412D09C2EA00212B4E /* Alamofire in Frameworks */,
+				AF0761072D0B3C7000FD6223 /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +89,7 @@
 			packageProductDependencies = (
 				AFCA56342D09BBD200212B4E /* SwiftUIIntrospect */,
 				AFCA56402D09C2EA00212B4E /* Alamofire */,
+				AF0761062D0B3C7000FD6223 /* KeychainAccess */,
 			);
 			productName = ProjectStructure;
 			productReference = AFB7AB192CEB790D007C8CD4 /* ProjectStructure.app */;
@@ -119,6 +122,7 @@
 			packageReferences = (
 				AFCA56332D09BBD200212B4E /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				AFCA563F2D09C2EA00212B4E /* XCRemoteSwiftPackageReference "Alamofire" */,
+				AF0761052D0B3C7000FD6223 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AFB7AB1A2CEB790D007C8CD4 /* Products */;
@@ -358,6 +362,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AF0761052D0B3C7000FD6223 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		AFCA56332D09BBD200212B4E /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
@@ -377,6 +389,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AF0761062D0B3C7000FD6223 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF0761052D0B3C7000FD6223 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
 		AFCA56342D09BBD200212B4E /* SwiftUIIntrospect */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = AFCA56332D09BBD200212B4E /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
