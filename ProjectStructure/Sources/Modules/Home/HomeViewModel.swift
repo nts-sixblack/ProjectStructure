@@ -22,7 +22,7 @@ extension HomeView {
             apiService.login(loginRequest) { result in
                 switch result {
                 case let .success(loginResponse):
-//                    print(loginResponse)
+                    print(loginResponse)
                     break
                 case let .failure(error):
                     print(error.localizedDescription)
@@ -34,17 +34,12 @@ extension HomeView {
             apiService.getUserData { result in
                 switch result {
                 case .success(let data):
-//                    print(data)
+                    print(data)
                     break
                 case .failure(let failure):
                     print(failure.localizedDescription)
                 }
             }
         }
-        
-        func triggerErrorAlert() {
-            coordinator.navigation = .view1
-        }
     }
-    
 }

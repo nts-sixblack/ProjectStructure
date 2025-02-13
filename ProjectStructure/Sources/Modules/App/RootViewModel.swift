@@ -14,14 +14,15 @@ extension RootView {
         @Service(\.localStorageService)
         private var localStorageService: LocalStorageService
         
+        @Published var path = FlowPath()
         @Published var coordinator = Coordinator()
         
         func openHomeView() {
-            coordinator.navigation = .home
+            path.push(Coordinator.Navigation.home)
         }
         
         func openSettingView() {
-            coordinator.navigation = .setting
+            path.push(Coordinator.Navigation.settings)
         }
     }
 }

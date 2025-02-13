@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AF0761072D0B3C7000FD6223 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = AF0761062D0B3C7000FD6223 /* KeychainAccess */; };
+		AFA096E82D5BA8B700AA0D28 /* EnvironmentOverrides in Frameworks */ = {isa = PBXBuildFile; productRef = AFA096E72D5BA8B700AA0D28 /* EnvironmentOverrides */; };
 		AFCA56352D09BBD200212B4E /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = AFCA56342D09BBD200212B4E /* SwiftUIIntrospect */; };
 		AFCA56412D09C2EA00212B4E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AFCA56402D09C2EA00212B4E /* Alamofire */; };
 /* End PBXBuildFile section */
@@ -42,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFA096E82D5BA8B700AA0D28 /* EnvironmentOverrides in Frameworks */,
 				AFCA56352D09BBD200212B4E /* SwiftUIIntrospect in Frameworks */,
 				AFCA56412D09C2EA00212B4E /* Alamofire in Frameworks */,
 				AF0761072D0B3C7000FD6223 /* KeychainAccess in Frameworks */,
@@ -90,6 +92,7 @@
 				AFCA56342D09BBD200212B4E /* SwiftUIIntrospect */,
 				AFCA56402D09C2EA00212B4E /* Alamofire */,
 				AF0761062D0B3C7000FD6223 /* KeychainAccess */,
+				AFA096E72D5BA8B700AA0D28 /* EnvironmentOverrides */,
 			);
 			productName = ProjectStructure;
 			productReference = AFB7AB192CEB790D007C8CD4 /* ProjectStructure.app */;
@@ -123,6 +126,7 @@
 				AFCA56332D09BBD200212B4E /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				AFCA563F2D09C2EA00212B4E /* XCRemoteSwiftPackageReference "Alamofire" */,
 				AF0761052D0B3C7000FD6223 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				AFA096E62D5BA8B700AA0D28 /* XCRemoteSwiftPackageReference "EnvironmentOverrides" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AFB7AB1A2CEB790D007C8CD4 /* Products */;
@@ -370,6 +374,14 @@
 				kind = branch;
 			};
 		};
+		AFA096E62D5BA8B700AA0D28 /* XCRemoteSwiftPackageReference "EnvironmentOverrides" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nalexn/EnvironmentOverrides";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.4;
+			};
+		};
 		AFCA56332D09BBD200212B4E /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
@@ -393,6 +405,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AF0761052D0B3C7000FD6223 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
+		};
+		AFA096E72D5BA8B700AA0D28 /* EnvironmentOverrides */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AFA096E62D5BA8B700AA0D28 /* XCRemoteSwiftPackageReference "EnvironmentOverrides" */;
+			productName = EnvironmentOverrides;
 		};
 		AFCA56342D09BBD200212B4E /* SwiftUIIntrospect */ = {
 			isa = XCSwiftPackageProductDependency;

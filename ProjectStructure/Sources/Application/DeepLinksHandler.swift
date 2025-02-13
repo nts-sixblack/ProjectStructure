@@ -46,7 +46,7 @@ struct RealDeepLinksHandler: DeepLinksHandler {
     func open(deepLink: DeepLink) {
         switch deepLink {
         case .home:
-//            self.container.appState.bulkUpdate {
+            self.container.appState.bulkUpdate {
 //                var rootCoordinator = RootView.Coordinator()
 //                rootCoordinator.navigation = .home(
 //                    HomeView.Coordinator(
@@ -56,7 +56,27 @@ struct RealDeepLinksHandler: DeepLinksHandler {
 //                    )
 //                )
 //                $0.routing.coordinator = rootCoordinator
-//            }
+                var path = FlowPath()
+                path.push(RootView.Coordinator.Navigation.home)
+                path.push(HomeView.Coordinator.Navigation.view1)
+                $0.path = path
+            }
+            break
+        case .setting:
+            self.container.appState.bulkUpdate {
+//                var rootCoordinator = RootView.Coordinator()
+//                rootCoordinator.navigation = .home(
+//                    HomeView.Coordinator(
+//                        navigation: .view1(
+//                            SettingView.Coordinator()
+//                        )
+//                    )
+//                )
+//                $0.routing.coordinator = rootCoordinator
+                var path = FlowPath()
+                path.push(RootView.Coordinator.Navigation.settings)
+                $0.path = path
+            }
             break
         default:
             break

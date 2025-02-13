@@ -8,18 +8,14 @@
 import Foundation
 
 extension RootView {
-    struct Coordinator: TestCoordinator {
-        var id = UUID()
+    struct Coordinator: BaseCoordinator {
         
-        enum Navigation: Identifiable {
+        enum Navigation: BaseNavigation {
             case home
-            case setting
-            
-            var id: String {
-                return "\(self)"
-            }
+            case settings
         }
         
-        var navigation: Navigation?
+        var alert: Alert?
+
     }
 }

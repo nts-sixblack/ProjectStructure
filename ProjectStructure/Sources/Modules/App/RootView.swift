@@ -11,10 +11,11 @@ import Combine
 
 struct RootView: View {
     
-    @ObservedObject var viewModel: ViewModel
+    @Environment(\.injected) private var injected: DIContainer
     
+    @ObservedObject var viewModel: ViewModel
     var body: some View {
-        NavigationStackConstructor {
+        FlowStack($viewModel.path, withNavigation: true) {
             VStack {
                 Text("Hello, World!")
                 Text("Root View")
@@ -33,12 +34,24 @@ struct RootView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.white)
-            .navigation(item: $viewModel.coordinator.navigation) { item in
+            .flowDestination(for: Coordinator.Navigation.self) { item in
                 switch item {
                 case .home: HomeView()
-                case .setting: SettingView()
+                case .settings: SettingView()
+                }
+            }
+            .onReceive(pathUpdate) { path in
+                DispatchQueue.main.async {
+                    viewModel.path = path
                 }
             }
         }
+    }
+}
+
+// MARK: - State update
+private extension RootView {
+    private var pathUpdate: AnyPublisher<FlowPath, Never> {
+        injected.appState.updates(for: \.path)
     }
 }

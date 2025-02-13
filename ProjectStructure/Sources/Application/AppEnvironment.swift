@@ -31,8 +31,7 @@ extension AppEnvironment {
             pushNotificationsHandler: pushNotificationsHandler
         )
         
-        return AppEnvironment(container: diContainer,
-                              systemEventsHandler: systemEventsHandler)
+        return AppEnvironment(container: diContainer, systemEventsHandler: systemEventsHandler)
     }
     
 }

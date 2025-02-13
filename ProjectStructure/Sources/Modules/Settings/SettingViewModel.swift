@@ -14,7 +14,7 @@ extension SettingView {
         @Published var coordinator = Coordinator()
         
         func triggerErrorAlert() {
-            coordinator.navigation = .view1
+            
         }
     }
 }

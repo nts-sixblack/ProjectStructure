@@ -8,22 +8,22 @@
 import Foundation
 
 extension HomeView {
-    struct Coordinator {
+    struct Coordinator: BaseCoordinator {
         
-        enum Alert: Equatable {
+        enum Alert: BaseAlert {
             case error(title: String, message: String)
             case success(title: String, message: String)
         }
         
-        enum Navigation: Identifiable {
-            case view1
-            
-            var id: String {
-                return "\(self)"
-            }
+        enum FullScreen: BaseFullScreen {
+            case viewController
         }
         
+        enum Navigation: BaseNavigation {
+            case view1
+            case view2
+        }
+
         var alert: Alert?
-        var navigation: Navigation?
     }
 }

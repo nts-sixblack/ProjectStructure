@@ -9,15 +9,23 @@ import Foundation
 import SwiftUI
 
 extension SettingView {
-    struct Coordinator {
-        enum Navigation {
-            case view1
-            
-            var id: String {
-                return "\(self)"
-            }
+    struct Coordinator: BaseCoordinator {
+        
+        enum Alert: BaseAlert {
+            case error(title: String, message: String)
+            case success(title: String, message: String)
         }
         
-        var navigation: Navigation?
+        enum FullScreen: BaseFullScreen {
+            case viewController
+        }
+        
+        enum Navigation: BaseNavigation {
+            case view1
+            case view2
+        }
+
+        var alert: Alert?
+
     }
 }

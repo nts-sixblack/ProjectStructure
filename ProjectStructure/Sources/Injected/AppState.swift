@@ -12,10 +12,10 @@ import Combine
 struct AppState: Equatable {
 //    var userData = UserData()
     var routing = ViewRouting()
+    var path = FlowPath()
     var system = System()
+    var list: [Int] = []
 //    var permissions = Permissions()
-    
-//    var coordinator: (any BaseCoordinator) = RootView.Coordinator()
 }
 
 extension AppState {
@@ -31,6 +31,7 @@ extension AppState {
 
 extension AppState {
     struct ViewRouting: Equatable {
+        var routes: [Route<AnyHashable>] = []
 //        var coordinator = RootView.Coordinator()
     }
 }
@@ -67,7 +68,7 @@ extension AppState {
 extension AppState {
     static var preview: AppState {
         var state = AppState()
-//        state.system.isActive = true
+        state.system.isActive = true
         return state
     }
 }

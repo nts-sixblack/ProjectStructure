@@ -15,8 +15,8 @@ protocol SystemEventsHandler {
     func sceneWillResignActive()
     func sceneWillEnterBackground()
     func handlePushRegistration(result: Result<Data, Error>)
-    func appDidReceiveRemoteNotification(payload: NotificationPayload,
-                                         fetchCompletion: @escaping FetchCompletion)
+    @MainActor
+    func appDidReceiveRemoteNotification(payload: [AnyHashable: Any]) async -> UIBackgroundFetchResult
 }
 
 struct RealSystemEventsHandler: SystemEventsHandler {
@@ -72,9 +72,8 @@ struct RealSystemEventsHandler: SystemEventsHandler {
 
     }
     
-    func appDidReceiveRemoteNotification(payload: NotificationPayload,
-                                         fetchCompletion: @escaping FetchCompletion) {
-        
+    func appDidReceiveRemoteNotification(payload: [AnyHashable: Any]) async -> UIBackgroundFetchResult {
+        return .noData
     }
 }
 

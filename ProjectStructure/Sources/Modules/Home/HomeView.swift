@@ -12,14 +12,28 @@ struct HomeView: View {
     @Service(\.localStorageService)
     private var localStorageService
     
+    @Environment(\.injected) private var injected: DIContainer
+    @EnvironmentObject var navigator: FlowPathNavigator
     @StateObject var viewModel = ViewModel()
     
     var body: some View {
         VStack {
             Button {
-                viewModel.triggerErrorAlert()
+                fullScreen()
             } label: {
                 Text("Show full screen")
+            }
+            
+            Button {
+                showView1()
+            } label: {
+                Text("View 1")
+            }
+
+            Button {
+                showView2()
+            } label: {
+                Text("View 2")
             }
             
             Button {
@@ -42,6 +56,12 @@ struct HomeView: View {
                 viewModel.getUserData()
             }
             
+            Button {
+                print(navigator)
+                print(injected.appState.value.path)
+            } label: {
+                Text("Show path")
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.white)
@@ -85,12 +105,32 @@ struct HomeView: View {
                 .isOpaque(true)
                 .dragToDismiss(false)
         }
-        
-        .navigation(item: $viewModel.coordinator.navigation) { item in
+        .flowDestination(for: Coordinator.Navigation.self) { item in
             switch item {
-            case .view1: SettingView()
+            case .view1: Text("View 1")
+            case .view2: Text("View 2")
             }
         }
+        .flowDestination(for: Coordinator.FullScreen.self) { item in
+            switch item {
+            case .viewController: HomeView()
+            }
+        }
+    }
+}
+
+// Func
+private extension HomeView {
+    func showView1() {
+        navigator.push(Coordinator.Navigation.view1)
+    }
+    
+    func showView2() {
+        navigator.push(Coordinator.Navigation.view2)
+    }
+    
+    func fullScreen() {
+        navigator.presentSheet(Coordinator.FullScreen.viewController, withNavigation: true)
     }
 }
 

@@ -7,17 +7,21 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 import Combine
 
 typealias NotificationPayload = [AnyHashable: Any]
 typealias FetchCompletion = (UIBackgroundFetchResult) -> Void
 
-@UIApplicationMain
+@MainActor
 final class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    lazy var systemEventsHandler: SystemEventsHandler? = {
-        self.systemEventsHandler(UIApplication.shared)
-    }()
+    private lazy var environment = AppEnvironment.shared
+    private var systemEventsHandler: SystemEventsHandler { environment.systemEventsHandler }
+    
+    var rootView: some View {
+        environment.rootView
+    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions
         launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -27,31 +31,19 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         let sceneConfig = UISceneConfiguration(name: nil, sessionRole: connectingSceneSession.role)
         sceneConfig.delegateClass = SceneDelegate.self
+        SceneDelegate.register(systemEventsHandler)
         return sceneConfig
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        systemEventsHandler?.handlePushRegistration(result: .success(deviceToken))
+        systemEventsHandler.handlePushRegistration(result: .success(deviceToken))
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        systemEventsHandler?.handlePushRegistration(result: .failure(error))
+        systemEventsHandler.handlePushRegistration(result: .failure(error))
     }
     
-    func application(_ application: UIApplication,
-                     didReceiveRemoteNotification userInfo: NotificationPayload,
-                     fetchCompletionHandler completionHandler: @escaping FetchCompletion) {
-        systemEventsHandler?
-            .appDidReceiveRemoteNotification(payload: userInfo, fetchCompletion: completionHandler)
-    }
-    
-    private func systemEventsHandler(_ application: UIApplication) -> SystemEventsHandler? {
-        return sceneDelegate(application)?.systemEventsHandler
-    }
-    
-    private func sceneDelegate(_ application: UIApplication) -> SceneDelegate? {
-        return application.windows
-            .compactMap({ $0.windowScene?.delegate as? SceneDelegate })
-            .first
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) async -> UIBackgroundFetchResult {
+        return await systemEventsHandler.appDidReceiveRemoteNotification(payload: userInfo)
     }
 }
