@@ -11,11 +11,10 @@ import Combine
 
 struct AppState: Equatable {
 //    var userData = UserData()
-    var routing = ViewRouting()
     var path = FlowPath()
     var system = System()
-    var list: [Int] = []
-//    var permissions = Permissions()
+    var permissions = Permissions()
+    var test : Bool = false
 }
 
 extension AppState {
@@ -30,13 +29,6 @@ extension AppState {
 }
 
 extension AppState {
-    struct ViewRouting: Equatable {
-        var routes: [Route<AnyHashable>] = []
-//        var coordinator = RootView.Coordinator()
-    }
-}
-
-extension AppState {
     struct System: Equatable {
         var isActive: Bool = false
         var keyboardHeight: CGFloat = 0
@@ -44,17 +36,20 @@ extension AppState {
 }
 
 extension AppState {
-//    struct Permissions: Equatable {
-//        var push: Permission.Status = .unknown
-//    }
-//    
-//    static func permissionKeyPath(for permission: Permission) -> WritableKeyPath<AppState, Permission.Status> {
-//        let pathToPermissions = \AppState.permissions
-//        switch permission {
-//        case .pushNotifications:
-//            return pathToPermissions.appending(path: \.push)
-//        }
-//    }
+    struct Permissions: Equatable {
+        var pushNotification: Permission.Status = .unknown
+        var photoLibrary: Permission.Status = .unknown
+    }
+    
+    static func permissionKeyPath(for permission: Permission) -> WritableKeyPath<AppState, Permission.Status> {
+        let pathToPermissions = \AppState.permissions
+        switch permission {
+        case .pushNotifications:
+            return pathToPermissions.appending(path: \.pushNotification)
+        case .photoLibrary(_):
+            return pathToPermissions.appending(path: \.photoLibrary)
+        }
+    }
 }
 
 //func == (lhs: AppState, rhs: AppState) -> Bool {

@@ -16,7 +16,7 @@ typealias FetchCompletion = (UIBackgroundFetchResult) -> Void
 @MainActor
 final class AppDelegate: UIResponder, UIApplicationDelegate {
     
-    private lazy var environment = AppEnvironment.shared
+    private lazy var environment = AppEnvironment.bootstrap()
     private var systemEventsHandler: SystemEventsHandler { environment.systemEventsHandler }
     
     var rootView: some View {

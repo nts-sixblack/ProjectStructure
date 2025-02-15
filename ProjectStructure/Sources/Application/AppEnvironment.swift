@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct AppEnvironment {
     
@@ -17,11 +18,14 @@ struct AppEnvironment {
 
 extension AppEnvironment {
     
-    private static func bootstrap() -> AppEnvironment {
+    static func bootstrap() -> AppEnvironment {
         let appState = Store<AppState>(AppState())
-        
-        let diContainer = DIContainer(appState: appState)
-        
+        let userPermission = RealUserPermissionsInteractor(appState: appState, openAppSettings: {
+            URL(string: UIApplication.openSettingsURLString).flatMap {
+                UIApplication.shared.open($0, options: [:], completionHandler: nil)
+            }
+        })
+        let diContainer = DIContainer(appState: appState, userPermissions: userPermission)
         let deepLinksHandler = RealDeepLinksHandler(container: diContainer)
         let pushNotificationsHandler = RealPushNotificationsHandler(deepLinksHandler: deepLinksHandler)
         

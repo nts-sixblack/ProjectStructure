@@ -12,17 +12,25 @@ import Combine
 struct DIContainer: EnvironmentKey {
     
     let appState: Store<AppState>
+    let userPermissions: UserPermissionsInteractor
     
     static var defaultValue: Self { Self.default }
     
     private static let `default` = DIContainer(appState: AppState())
     
-    init(appState: Store<AppState>) {
+    init(appState: Store<AppState>, userPermissions: UserPermissionsInteractor) {
         self.appState = appState
+        self.userPermissions = userPermissions
     }
     
     init(appState: AppState) {
-        self.init(appState: Store(appState))
+        let storeAppState = Store(appState)
+        let userPermissionsInteractor = RealUserPermissionsInteractor(appState: storeAppState, openAppSettings: {
+            URL(string: UIApplication.openSettingsURLString).flatMap {
+                UIApplication.shared.open($0, options: [:], completionHandler: nil)
+            }
+        })
+        self.init(appState: Store(appState), userPermissions: userPermissionsInteractor)
     }
 }
 

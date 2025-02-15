@@ -26,6 +26,8 @@ struct RealSystemEventsHandler: SystemEventsHandler {
     let pushNotificationsHandler: PushNotificationsHandler
     private let cancelBag = CancelBag()
     
+    
+    
     init(container: DIContainer,
          deepLinksHandler: DeepLinksHandler,
          pushNotificationsHandler: PushNotificationsHandler) {
@@ -58,6 +60,8 @@ struct RealSystemEventsHandler: SystemEventsHandler {
     
     func sceneDidBecomeActive() {
         container.appState[\.system.isActive] = true
+        container.userPermissions.resolveStatus(for: .pushNotifications)
+        container.userPermissions.resolveStatus(for: .photoLibrary(accessLevel: .readWrite))
     }
     
     func sceneWillResignActive() {
