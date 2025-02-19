@@ -10,7 +10,7 @@ import SwiftUI
 
 extension HomeView {
     
-    class ViewModel: ObservableObject {
+    class ViewModel: BaseViewModel {
         
         @Service(\.apiService)
         private var apiService: APIService

@@ -11,7 +11,7 @@ struct SettingView: View {
     
     @Environment(\.dismissLegacy) private var dismiss
     
-    @StateObject var viewModel = ViewModel()
+    @ObservedObject var viewModel: ViewModel
     
     var body: some View {
         VStack {
@@ -36,5 +36,5 @@ struct SettingView: View {
 }
 
 #Preview {
-    SettingView()
+    SettingView(viewModel: .init())
 }

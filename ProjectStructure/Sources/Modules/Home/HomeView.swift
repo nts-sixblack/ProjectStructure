@@ -9,12 +9,10 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @Service(\.localStorageService)
-    private var localStorageService
-    
     @Environment(\.injected) private var injected: DIContainer
     @EnvironmentObject var navigator: FlowPathNavigator
-    @StateObject var viewModel = ViewModel()
+    
+    @ObservedObject var viewModel: ViewModel
     
     var body: some View {
         VStack {
@@ -113,7 +111,7 @@ struct HomeView: View {
         }
         .flowDestination(for: Coordinator.FullScreen.self) { item in
             switch item {
-            case .viewController: HomeView()
+            case .viewController: HomeView(viewModel: .init())
             }
         }
     }
@@ -135,5 +133,5 @@ private extension HomeView {
 }
 
 #Preview {
-    HomeView(viewModel: HomeView.ViewModel())
+    HomeView(viewModel: .init())
 }

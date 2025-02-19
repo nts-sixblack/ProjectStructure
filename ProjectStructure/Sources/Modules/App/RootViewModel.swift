@@ -24,5 +24,9 @@ extension RootView {
         func openSettingView() {
             path.push(Coordinator.Navigation.settings)
         }
+        
+        func openDataView() {
+            path.push(Coordinator.Navigation.data)
+        }
     }
 }

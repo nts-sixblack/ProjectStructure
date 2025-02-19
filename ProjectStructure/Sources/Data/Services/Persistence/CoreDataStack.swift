@@ -141,7 +141,7 @@ extension CoreDataStack {
         }
         
         var modelName: String {
-            return "db_model_v1"
+            return "data_model_v1"
         }
         
         func dbFileURL(_ directory: FileManager.SearchPathDirectory,

@@ -12,6 +12,6 @@ class ServiceContainer {
     
     // Services that is used least one time in app
     lazy var localStorageService: LocalStorageService = UserDefaultService()
-    lazy var persistence: CoreDataStack = CoreDataStack(version: CoreDataStack.Version.actual)
+    lazy var databaseService: DatabaseService = DatabaseService(repository: DatabaseRepositories())
     lazy var apiService: APIService = APIService()
 }

@@ -13,6 +13,7 @@ extension RootView {
         enum Navigation: BaseNavigation {
             case home
             case settings
+            case data
         }
         
         var alert: Alert?

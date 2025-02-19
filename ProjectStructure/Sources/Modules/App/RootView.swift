@@ -35,6 +35,12 @@ struct RootView: View {
                     Text("Setting View")
                 }
                 
+                Button {
+                    viewModel.openDataView()
+                } label: {
+                    Text("Data View")
+                }
+                
                 if showButtonPermission {
                     Button {
                         injected.userPermissions.request(permission: .pushNotifications)
@@ -57,13 +63,14 @@ struct RootView: View {
             .background(.white)
             .flowDestination(for: Coordinator.Navigation.self) { item in
                 switch item {
-                case .home: HomeView()
-                case .settings: SettingView()
+                case .home: HomeView(viewModel: .init())
+                case .settings: SettingView(viewModel: .init())
+                case .data: DataView(viewModel: .init())
                 }
             }
             .onReceive(pathUpdate) { path in
                 DispatchQueue.main.async {
-                    viewModel.path = path
+//                    viewModel.path = path
                 }
             }
             .onReceive(pushNotificationUpdate) { self.showButtonPermission = $0 }

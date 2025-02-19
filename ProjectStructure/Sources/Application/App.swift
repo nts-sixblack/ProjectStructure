@@ -25,7 +25,7 @@ extension AppEnvironment {
     var rootView: some View {
         RootView(viewModel: .init())
             .modifier(RootViewAppearance())
-            .attachEnvironmentOverrides(onChange: onChangeHandler)
+//            .attachEnvironmentOverrides(onChange: onChangeHandler)
             .inject(container)
     }
     
