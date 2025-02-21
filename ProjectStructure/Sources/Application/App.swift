@@ -25,14 +25,14 @@ extension AppEnvironment {
     var rootView: some View {
         RootView(viewModel: .init())
             .modifier(RootViewAppearance())
-//            .attachEnvironmentOverrides(onChange: onChangeHandler)
+            .attachEnvironmentOverrides(onChange: onChangeHandler)
             .inject(container)
     }
     
     private var onChangeHandler: (EnvironmentValues.Diff) -> Void {
         return { diff in
             if !diff.isDisjoint(with: [.locale, .sizeCategory]) {
-                self.container.appState[\.path] = FlowPath()
+//                self.container.appState[\.path] = FlowPath()
             }
         }
     }

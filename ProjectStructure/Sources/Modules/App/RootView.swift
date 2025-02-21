@@ -26,7 +26,13 @@ struct RootView: View {
                 Button {
                     viewModel.openHomeView()
                 } label: {
-                    Text("Home View")
+                    Text(LocalizedStringKey(stringLiteral: "Home View"))
+                }
+                
+                Button {
+                    viewModel.openHomeView()
+                } label: {
+                    Text("Home View".localized)
                 }
                 
                 Button {

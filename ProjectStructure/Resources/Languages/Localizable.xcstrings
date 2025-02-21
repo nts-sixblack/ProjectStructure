@@ -1,0 +1,202 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "**%@**" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**%@**"
+          }
+        }
+      }
+    },
+    "Canceled by user" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Huỷ bởi người dùng"
+          }
+        }
+      }
+    },
+    "Content" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nội dung"
+          }
+        }
+      }
+    },
+    "Data is missing" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thiếu dữ liệu"
+          }
+        }
+      }
+    },
+    "Data View" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Màn hình Data"
+          }
+        }
+      }
+    },
+    "Get user data" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lấy thông tin user"
+          }
+        }
+      }
+    },
+    "Hello, World!" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Xin chào thế giới"
+          }
+        }
+      }
+    },
+    "Home View" : {
+      "localizations" : {
+        "da" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home in danish"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Màn hình Home"
+          }
+        }
+      }
+    },
+    "Login" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Đằng nhập"
+          }
+        }
+      }
+    },
+    "Popup error" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hộp thoại lỗi"
+          }
+        }
+      }
+    },
+    "Popup success" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hộp thoại thành công"
+          }
+        }
+      }
+    },
+    "Request photo permission" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Xin quyền ảnh"
+          }
+        }
+      }
+    },
+    "Request push notification" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Xin quyền thông báo"
+          }
+        }
+      }
+    },
+    "Root View" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Màn hình Root"
+          }
+        }
+      }
+    },
+    "Setting View" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Màn hình cài dặt"
+          }
+        }
+      }
+    },
+    "Show full screen" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hiển thị toàn bộ màn hình"
+          }
+        }
+      }
+    },
+    "Show path" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hiển thị đường dẫn"
+          }
+        }
+      }
+    },
+    "View 1" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Màn hình 1"
+          }
+        }
+      }
+    },
+    "View 2" : {
+      "localizations" : {
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Màn hình 2"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

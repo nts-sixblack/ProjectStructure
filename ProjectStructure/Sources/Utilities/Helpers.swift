@@ -7,15 +7,19 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 extension String {
-    func localized(_ locale: Locale) -> String {
-        let localeId = locale.shortIdentifier
-        guard let path = Bundle.main.path(forResource: localeId, ofType: "lproj"),
-            let bundle = Bundle(path: path) else {
-            return NSLocalizedString(self, comment: "")
-        }
-        return bundle.localizedString(forKey: self, value: nil, table: nil)
+//    func localized(_ locale: Locale) -> String {
+//        let localeId = locale.shortIdentifier
+//        guard let path = Bundle.main.path(forResource: localeId, ofType: "lproj"),
+//            let bundle = Bundle(path: path) else {
+//            return NSLocalizedString(self, comment: "")
+//        }
+//        return bundle.localizedString(forKey: self, value: nil, table: nil)
+//    }
+    var localized: LocalizedStringKey {
+        LocalizedStringKey(self)
     }
 }
 
