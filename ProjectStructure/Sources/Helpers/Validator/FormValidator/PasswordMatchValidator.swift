@@ -15,11 +15,13 @@ public struct ValidatedPassword: Equatable {
     }
 }
 
+/// A structure that holds two password strings for comparison and validation.
 public struct PasswordInfo {
     let pass1: String
     let pass2: String
 }
 
+/// A typealias for a closure that produces password validation messages.
 public typealias PasswordMatchingMessage = () -> (empty: String, notMatching: String, invalidPattern: String)
 
 public class PasswordMatchValidator: Validatable {
@@ -31,7 +33,7 @@ public class PasswordMatchValidator: Validatable {
     private let secondPassword: StringProducerClosure
     private let pattern: NSRegularExpression?
 
-    public let message: StringProducerClosure = {""}
+    public let message: StringProducerClosure = { "" }
     public let validationMessage: PasswordMatchingMessage
 
     public var value: ValidatedPassword? = ValidatedPassword(password: "", type: 0)
@@ -60,14 +62,14 @@ public class PasswordMatchValidator: Validatable {
         guard let value else {
             return nil
         }
-        let p1 = value.type == 0 ? value.password : firstPassword()
-        let p2 = value.type == 1 ? value.password : secondPassword()
+        let password1 = value.type == 0 ? value.password : firstPassword()
+        let password2 = value.type == 1 ? value.password : secondPassword()
 
-        if p1.isEmpty, p2.isEmpty {
+        if password1.isEmpty, password2.isEmpty {
             return validationMessage().empty
         }
 
-        return p1 == p2 ? nil : validationMessage().notMatching
+        return password1 == password2 ? nil : validationMessage().notMatching
     }
 
     private func validatePattern() -> String? {

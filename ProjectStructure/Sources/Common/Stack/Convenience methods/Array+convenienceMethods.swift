@@ -55,8 +55,8 @@ public extension Array where Element: RouteProtocol {
 public extension Array where Element: RouteProtocol {
   /// Returns true if it's possible to go back the given number of screens.
   /// - Parameter count: The number of screens to go back. Defaults to 1.
-  func canGoBack(_ count: Int = 1) -> Bool {
-    self.count - count >= 0 && count >= 0
+  func canGoBack(_ `count`: Int = 1) -> Bool {
+    self.count - `count` >= 0 && `count` >= 0
   }
 
   /// Goes back a given number of screens off the stack
@@ -67,10 +67,10 @@ public extension Array where Element: RouteProtocol {
       "Can't go back\(count == 1 ? "" : " \(count) screens") - the screen count is \(self.count)"
     )
     assert(
-      count >= 0,
+      `count` >= 0,
       "Can't go back \(count) screens - count must be positive"
     )
-    guard self.count - count >= 0, count >= 0 else { return }
+    guard self.count - `count` >= 0, `count` >= 0 else { return }
     removeLast(count)
   }
 
@@ -276,8 +276,8 @@ public extension Array where Element: RouteProtocol {
   /// Dismisses a given number of presentation layers off the stack. Only screens that have been presented will
   /// be included in the count.
   /// - Parameter count: The number of presentation layers to go back. Defaults to 1.
-  mutating func dismiss(count: Int = 1) {
-    assert(count >= 0)
+  mutating func dismiss(`count`: Int = 1) {
+    assert(`count` >= 0)
     var index = endIndex - 1
     var dismissed = 0
     while dismissed < count, indices.contains(index) {
@@ -298,8 +298,8 @@ public extension Array where Element: RouteProtocol {
   /// Dismisses all presented sheets and modals, without popping any pushed screens in the bottommost
   /// presentation layer.
   mutating func dismissAll() {
-    let count = filter(\.isPresented).count
-    guard count > 0 else { return }
-    dismiss(count: count)
+    let countPresented = filter(\.isPresented).count
+    guard countPresented > 0 else { return }
+    dismiss(count: countPresented)
   }
 }

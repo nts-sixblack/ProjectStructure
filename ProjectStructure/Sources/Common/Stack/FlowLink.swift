@@ -23,8 +23,6 @@ public struct FlowLink<P: Hashable, Label: View>: View {
   }
 
   public var body: some View {
-    // TODO: Ensure this button is styled more like a NavigationLink within a List.
-    // See: https://gist.github.com/tgrapperon/034069d6116ff69b6240265132fd9ef7
     Button(
       action: {
         guard let route else { return }

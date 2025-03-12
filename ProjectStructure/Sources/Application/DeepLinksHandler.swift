@@ -52,14 +52,12 @@ struct RealDeepLinksHandler: DeepLinksHandler {
                 path.push(HomeView.Coordinator.Navigation.view1)
                 $0.path = path
             }
-            break
         case .setting:
             self.container.appState.bulkUpdate {
                 var path = FlowPath()
                 path.push(RootView.Coordinator.Navigation.settings)
                 $0.path = path
             }
-            break
         default:
             break
         }

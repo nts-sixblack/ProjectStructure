@@ -7,7 +7,7 @@ extension ObservableObject {
   @_disfavoredOverload
   @MainActor
   @discardableResult
-  func _withDelaysIfUnsupported<Screen>(_ keyPath: WritableKeyPath<Self, [Route<Screen>]>, transform: (inout [Route<Screen>]) -> Void, onCompletion: (() -> Void)? = nil) -> Task<Void, Never>? {
+  func withDelaysItemIfUnsupported<Screen>(_ keyPath: WritableKeyPath<Self, [Route<Screen>]>, transform: (inout [Route<Screen>]) -> Void, onCompletion: (() -> Void)? = nil) -> Task<Void, Never>? {
     let start = self[keyPath: keyPath]
     let end = apply(transform, to: start)
 
@@ -29,7 +29,7 @@ public extension ObservableObject {
   @_disfavoredOverload
   @MainActor
   func withDelaysIfUnsupported<Screen>(_ keyPath: WritableKeyPath<Self, [Route<Screen>]>, transform: (inout [Route<Screen>]) -> Void, onCompletion: (() -> Void)? = nil) {
-    _withDelaysIfUnsupported(keyPath, transform: transform, onCompletion: onCompletion)
+      withDelaysItemIfUnsupported(keyPath, transform: transform, onCompletion: onCompletion)
   }
 
   /// Any changes can be made to the routes array passed to the transform closure. If those

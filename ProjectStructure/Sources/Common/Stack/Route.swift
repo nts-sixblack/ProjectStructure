@@ -1,5 +1,6 @@
 import Foundation
 
+/// A typealias representing a collection of navigation routes.
 public typealias Routes<T> = [Route<T>]
 
 /// A step in the navigation flow of an app, encompassing a Screen and how it should be shown,

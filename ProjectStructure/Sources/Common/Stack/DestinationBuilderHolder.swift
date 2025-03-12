@@ -13,19 +13,23 @@ class DestinationBuilderHolder: ObservableObject {
   init() {
     builders = [:]
   }
-
-  func appendBuilder<T: Hashable>(_ builder: @escaping (Binding<T>) -> AnyView) {
-    let key = Self.identifier(for: T.self)
-    builders[key] = { data in
-      let binding = Binding(
-        get: { data.wrappedValue as! T },
-        set: { newValue, transaction in
-          data.transaction(transaction).wrappedValue = newValue
+    
+    func appendBuilder<T: Hashable>(_ builder: @escaping (Binding<T>) -> AnyView) {
+        let key = Self.identifier(for: T.self)
+        builders[key] = { data in
+            guard let wrappedValue = data.wrappedValue as? T else {
+                // Xử lý trường hợp không thể ép kiểu (trả về view mặc định hoặc báo lỗi)
+                fatalError("Type mismatch: Expected \(T.self), got \(type(of: data.wrappedValue))")
+            }
+            let binding = Binding(
+                get: { wrappedValue },
+                set: { newValue, transaction in
+                    data.transaction(transaction).wrappedValue = newValue
+                }
+            )
+            return builder(binding)
         }
-      )
-      return builder(binding)
     }
-  }
 
   func appendLocalBuilder(identifier: LocalDestinationID, _ builder: @escaping () -> AnyView) {
     let key = identifier.rawValue.uuidString

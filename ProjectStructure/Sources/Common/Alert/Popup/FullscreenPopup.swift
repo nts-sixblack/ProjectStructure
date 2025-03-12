@@ -39,10 +39,10 @@ public struct FullscreenPopup<Item: Equatable, PopupContent: View>: ViewModifier
     var isOpaque: Bool
 
     /// called when when dismiss animation starts
-    var userWillDismissCallback: (DismissSource) -> ()
+    var userWillDismissCallback: (DismissSource) -> Void
 
     /// called when when dismiss animation ends
-    var userDismissCallback: (DismissSource) -> ()
+    var userDismissCallback: (DismissSource) -> Void
 
     var params: Popup<PopupContent>.PopupParameters
 
@@ -261,7 +261,7 @@ public struct FullscreenPopup<Item: Equatable, PopupContent: View>: ViewModifier
         }
     }
 
-    func onAnimationCompleted() -> () {
+    func onAnimationCompleted() {
         if shouldShowContent { // return if this was called on showing animation, only proceed if called on hiding
             eventsSemaphore.signal()
             return
@@ -298,7 +298,7 @@ public struct FullscreenPopup<Item: Equatable, PopupContent: View>: ViewModifier
         }
     }
 
-    func performWithDelay(_ delay: Double, block: @escaping ()->()) {
+    func performWithDelay(_ delay: Double, block: @escaping () -> Void ) {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             block()
         }

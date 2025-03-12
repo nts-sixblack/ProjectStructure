@@ -136,14 +136,14 @@ extension LazyList: RandomAccessCollection {
 extension LazyList: Equatable where T: Equatable {
     static func == (lhs: LazyList<T>, rhs: LazyList<T>) -> Bool {
         guard lhs.count == rhs.count else { return false }
-        return zip(lhs, rhs).first(where: { $0 != $1 }) == nil
+        return !zip(lhs, rhs).contains { $0 != $1 }
     }
 }
 
 extension LazyList: CustomStringConvertible {
     var description: String {
         let elements = self.reduce("", { str, element in
-            if str.count == 0 {
+            if str.isEmpty {
                 return "\(element)"
             }
             return str + ", \(element)"

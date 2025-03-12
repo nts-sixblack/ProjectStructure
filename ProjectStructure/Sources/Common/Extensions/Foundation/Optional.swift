@@ -19,7 +19,7 @@ protocol StringType {
     var isEmpty: Bool { get }
 }
 
-extension String : StringType { }
+extension String: StringType { }
 
 extension Optional where Wrapped: StringType {
     var isNullOrEmpty: Bool {
@@ -37,7 +37,6 @@ extension Optional where Wrapped == Int {
         return self == 0
     }
 }
-
 
 // MARK: - Optional String functions
 extension Optional where Wrapped == String {
@@ -60,7 +59,6 @@ extension Optional where Wrapped == Bool {
         return self ?? false
     }
 }
-
 
 // MARK: - Optional Int functions
 extension Optional where Wrapped == Int {

@@ -8,7 +8,10 @@ import Foundation
 /// This strategy allows you to choose between displaying all validation messages at once
 /// or displaying them one by one.
 public enum CompositeValidationMessagesStrategy {
+    /// Displays all validation messages at once.
     case all
+    
+    /// Displays validation messages one by one, typically stopping at the first failure.
     case onByOne
 }
 
@@ -80,8 +83,15 @@ public class CompositeValidator: StringValidator {
 
 extension CompositeValidator {
 
+    /// Represents the type of validation logic used in `CompositeValidator`.
     public enum ValidationType {
+        /// Requires all validation rules to pass.
         case all
+        
+        /// Requires at least one validation rule to pass.
+        ///
+        /// - Parameters:
+        ///   - messageTitle: An optional title for the validation message when at least one rule passes.
         case any(messageTitle: String?)
     }
 

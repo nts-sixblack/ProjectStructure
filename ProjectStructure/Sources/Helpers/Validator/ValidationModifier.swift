@@ -9,23 +9,40 @@
 import Foundation
 import SwiftUI
 
+/// A typealias for a view that displays validation error messages.
+///
+/// - Parameter message: The validation error message.
+/// - Returns: A view that represents the validation error.
 public typealias ValidationErrorView<ErrorView: View> = (_ message: String) -> ErrorView
 
+/// A container that holds validation-related components and provides a method to trigger validation.
 public struct ValidationContainer {
+    
+    /// The validator responsible for handling validation logic.
     public let validator: any Validatable
+    
+    /// A publisher that emits validation events.
     public let publisher: ValidationPublisher
+    
+    /// A subject that allows for manual triggering of validation events.
     public let subject: ValidationSubject
 
+    /// Triggers validation using the associated validator.
+    ///
+    /// - Parameters:
+    ///   - isDisabled: A flag indicating whether validation should be disabled. Defaults to `false`.
+    ///   - shouldShowError: A flag indicating whether validation errors should be displayed. Defaults to `true`.
     public func validate(isDisabled: Bool = false, shouldShowError: Bool = true) {
         validator.triggerValidation(
-                isDisabled: isDisabled,
-                shouldShowError: shouldShowError)
+            isDisabled: isDisabled,
+            shouldShowError: shouldShowError
+        )
     }
 }
 
 public extension View {
 
-    ///A modifier used for validating a root publisher.
+    /// A modifier used for validating a root publisher.
     /// Whenever the publisher changes, the value will be validated
     /// and propagated to this view.
     /// In case it's invalid, an error message will be displayed under the view
@@ -44,7 +61,7 @@ public extension View {
         return modifier(validationModifier).eraseToAnyView()
     }
 
-    ///A modifier used for validating a root publisher.
+    /// A modifier used for validating a root publisher.
     /// Whenever the publisher changes, the value will be validated
     /// and propagated to this view.
     /// In case it's invalid, an error message will be displayed under the view

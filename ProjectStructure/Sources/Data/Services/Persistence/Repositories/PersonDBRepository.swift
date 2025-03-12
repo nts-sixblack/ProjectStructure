@@ -67,10 +67,10 @@ extension PersonMO {
         request.fetchLimit = 1
         return request
     }
-    
+
     static func getPerson(search: String) -> NSFetchRequest<PersonMO> {
         let request = newFetchRequest()
-        if search.count == 0 {
+        if search.isEmpty {
             request.predicate = NSPredicate(value: true)
         } else {
             let nameMatch = NSPredicate(format: "name CONTAINS[cd] %@", search)

@@ -9,9 +9,20 @@
 import Foundation
 import Combine
 
+/// A publisher that emits validation events without failure.
 public typealias ValidationPublisher = AnyPublisher<Validation, Never>
+
+/// A subject that allows manual triggering of validation events.
 public typealias ValidationSubject = PassthroughSubject<Validation, Never>
+
+/// A closure that determines whether validation should be disabled.
+///
+/// - Returns: A Boolean value indicating whether validation is disabled.
 public typealias DisableValidationClosure = () -> Bool
+
+/// A closure that is executed when a validation event occurs.
+///
+/// - Parameter validation: The validation result that is being handled.
 public typealias OnValidate = (Validation) -> Void
 
 /// Create ValidationContainer object to

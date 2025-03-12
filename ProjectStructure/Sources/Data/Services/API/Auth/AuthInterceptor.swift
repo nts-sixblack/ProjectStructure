@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-class AuthInterceptor: RequestInterceptor {
+final class AuthInterceptor: RequestInterceptor, @unchecked Sendable {
     
     let retryLimit = 3
     let retryDelay: TimeInterval = 2
@@ -57,7 +57,7 @@ class AuthInterceptor: RequestInterceptor {
                     case .success:
                         self.isRetrying = false
                         completion(.retryWithDelay(self.retryDelay))
-                    case .failure(let failure):
+                    case .failure:
                         self.isRetrying = false
                         completion(.doNotRetry)
                     }

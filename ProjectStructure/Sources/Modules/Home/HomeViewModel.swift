@@ -23,7 +23,6 @@ extension HomeView {
                 switch result {
                 case let .success(loginResponse):
                     print(loginResponse)
-                    break
                 case let .failure(error):
                     print(error.localizedDescription)
                 }
@@ -35,7 +34,6 @@ extension HomeView {
                 switch result {
                 case .success(let data):
                     print(data)
-                    break
                 case .failure(let failure):
                     print(failure.localizedDescription)
                 }

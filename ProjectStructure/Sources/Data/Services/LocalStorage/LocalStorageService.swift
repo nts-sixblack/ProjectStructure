@@ -21,5 +21,4 @@ class UserDefaultService: LocalStorageService {
     @ObjectUserDefaultWrapper(key: Keys.isFirstTimeOpenApp, defaultValue: true)
     var isFirstTimeOpenApp: Bool
     
-   
 }

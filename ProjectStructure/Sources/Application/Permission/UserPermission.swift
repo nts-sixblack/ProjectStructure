@@ -50,18 +50,17 @@ final class RealUserPermissionsInteractor: UserPermissionsInteractor {
 
     func resolveStatus(for permission: Permission) {
         let keyPath = AppState.permissionKeyPath(for: permission)
-        let currentStatus = appState[keyPath]
         let appState = appState
         switch permission {
         case .pushNotifications:
             Task { @MainActor in
                 appState[keyPath] = await pushNotificationsPermissionStatus()
-                print(appState.value.permissions.pushNotification)
+                print("Notification: \(appState.value.permissions.pushNotification)")
             }
         case let .photoLibrary(accessLevel):
             Task { @MainActor in
                 appState[keyPath] = await photosPermissionStatus(for: accessLevel)
-                print(appState.value.permissions.photoLibrary)
+                print("Photo: \(appState.value.permissions.photoLibrary)")
             }
         }
     }
@@ -108,7 +107,7 @@ private extension RealUserPermissionsInteractor {
         let status = PHPhotoLibrary.authorizationStatus(for: accessLevel)
         return status.map
     }
-    
+
     func requestPhotoLibraryPermission(for accessLevel: PHAccessLevel) async {
         let center = photoLibraryCenter
 //        let status = await PHPhotoLibrary.requestAuthorization(for: .readWrite)

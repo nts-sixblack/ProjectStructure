@@ -18,9 +18,16 @@ public class PasswordValidator: StringValidator {
         if let pattern {
             self.pattern = pattern
         } else {
-            self.pattern = try! NSRegularExpression(
+            do {
+                self.pattern = try NSRegularExpression(
                     pattern: Regex.password.rawValue,
-                    options: .caseInsensitive)
+                    options: .caseInsensitive
+                )
+            } catch {
+                // Xử lý lỗi ở đây, ví dụ:
+                print("Failed to create regex: \(error)")
+                self.pattern = NSRegularExpression() // Giá trị mặc định
+            }
         }
         self.message = message
     }

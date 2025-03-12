@@ -5,6 +5,7 @@
 
 import Foundation
 
+/// A typealias representing a callback function for validation.
 public typealias ValidationCallback = (String) -> String?
 
 /// This validator validates if a condition is valid or not.
@@ -23,7 +24,7 @@ public class InlineValidator<Value>: Validatable {
         ""
     }
 
-    public var value: Value? = nil
+    public var value: Value?
 
     public func validate() -> Validation {
         guard let value else {

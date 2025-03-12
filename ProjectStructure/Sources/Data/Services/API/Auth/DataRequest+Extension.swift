@@ -8,10 +8,9 @@
 import Foundation
 import Alamofire
 
-
 extension DataRequest {
     func customValidate(url: String) -> Self {
-        return self.validate { request, response, data -> Request.ValidationResult in
+        return self.validate { _, response, _ -> Request.ValidationResult in
             let statusCode = response.statusCode
             if statusCode != 401 {
                 return .success(())

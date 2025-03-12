@@ -46,11 +46,11 @@ struct HomeView: View {
                 Text("Popup success")
             }
 
-            Button ("Login") {
+            Button("Login") {
                 viewModel.login()
             }
             
-            Button ("Get user data") {
+            Button("Get user data") {
                 viewModel.getUserData()
             }
             

@@ -111,7 +111,7 @@ extension Date {
         return dateformat.string(from: self)
     }
     
-    func toDateWithOrdinalSuffix(isIncludeDay: Bool = true) -> String{
+    func toDateWithOrdinalSuffix(isIncludeDay: Bool = true) -> String {
         // Day
         let calendar = Calendar.current
         let anchorComponents = calendar.dateComponents([.day, .month, .year], from: self)

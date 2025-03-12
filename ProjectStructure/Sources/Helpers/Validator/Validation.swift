@@ -28,11 +28,11 @@ public enum Validation: Equatable {
         }
     }
 
-    static public func ==(lhs: Validation, rhs: Validation) -> Bool {
+    static public func == (lhs: Validation, rhs: Validation) -> Bool {
         switch (lhs, rhs) {
         case (.success, success):
             return true
-        case (.failure(let a), .failure(let b)):
+        case let (.failure(a), .failure(b)):
             return a == b
         default: return false
         }

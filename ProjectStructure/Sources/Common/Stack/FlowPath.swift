@@ -28,7 +28,7 @@ public struct FlowPath: Equatable {
         routes.append(value.erased())
     }
     
-    public mutating func removeLast(_ k: Int = 1) {
-        routes.removeLast(k)
+    public mutating func removeLast(_ index: Int = 1) {
+        routes.removeLast(index)
     }
 }

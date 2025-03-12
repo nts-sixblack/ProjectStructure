@@ -17,10 +17,6 @@ protocol PersonDBService {
 struct RealPersonService: PersonDBService {
     let dbRepository: PersonRepository
     
-    init(dbRepository: PersonRepository) {
-        self.dbRepository = dbRepository
-    }
-    
     func load(persons: LoadableSubject<LazyList<Person>>, search: String) {
         let cancelBag = CancelBag()
         persons.wrappedValue.setIsLoading(cancelBag: cancelBag)

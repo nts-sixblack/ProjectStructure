@@ -6,11 +6,14 @@
 import Combine
 import Foundation
 
+/// A container that holds a validator and a closure to determine if validation should be disabled.
 public struct ValidatorContainer {
+    /// The validator that performs validation.
     let validator: any Validatable
+    
+    /// A closure that determines whether validation should be disabled.
     let disableValidation: DisableValidationClosure
 }
-
 
 /// You can use to control the validation form.
 /// For example, you can trigger the validation manually. And
@@ -83,12 +86,9 @@ public class FormManager: ObservableObject {
     ///
     /// - Returns: Bool
     public func isAllValid() -> Bool {
-        validators.first {
-            if $0.disableValidation() {
-                return false
-            }
-            return !$0.validator.validate().isSuccess
-        } == nil
+        !validators.contains {
+            !$0.disableValidation() && !$0.validator.validate().isSuccess
+        }
     }
 
     /// Returns all validation errors.
@@ -130,15 +130,17 @@ public extension FormManager {
 
     /// Form validation type
     /// It includes 3 cases:
-    ///  1) immediate: the validation is triggered every time the field is changed. An error
-    ///     message will be shown in case the value is invalid.
-    ///  2) deferred: in this case, the validation will be triggered manually only using `FormValidation.triggerValidation()`
-    ///     The error messages will be displayed only after triggering the validation manually.
-    ///  3) silent: In this case, no validation message is displayed, and it's your responsibility to display them
-    ///     using `FormValidation.validationMessages()`.
     enum ValidationType {
+        ///  1) immediate: the validation is triggered every time the field is changed. An error
+        ///     message will be shown in case the value is invalid.
         case immediate
+        
+        ///  2) deferred: in this case, the validation will be triggered manually only using `FormValidation.triggerValidation()`
+        ///     The error messages will be displayed only after triggering the validation manually.
         case deferred
+        
+        ///  3) silent: In this case, no validation message is displayed, and it's your responsibility to display them
+        ///     using `FormValidation.validationMessages()`.
         case silent
 
         func shouldShowError() -> Bool {
@@ -151,6 +153,5 @@ public extension FormManager {
             }
         }
     }
-
 
 }

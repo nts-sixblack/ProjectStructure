@@ -10,7 +10,7 @@ import SwiftUI
 
 struct CustomAlertView<Content: View>: View {
     
-    var icon: Image? = nil
+    var icon: Image?
     let title: String?
     var titleColor: Color = .black
     let description: String?
@@ -23,7 +23,7 @@ struct CustomAlertView<Content: View>: View {
     var cancelActionTitleColor: Color = .gray
     var cancelAction: (() -> Void)?
     
-    var isPrimaryActionReady: ()->Bool = { true }
+    var isPrimaryActionReady: () -> Bool = { true }
     var primaryActionTitle: String?
     var primaryActionTitleColor: Color = .black
     var primaryAction: (() -> Void)?
@@ -69,7 +69,7 @@ struct CustomAlertView<Content: View>: View {
             
             if buttonAxis == .horizontal {
                 if showLine {
-                    CustomDivider()
+                    customDivider()
                         .frame(height: 1)
                 }
                 
@@ -88,7 +88,7 @@ struct CustomAlertView<Content: View>: View {
                     }
                     
                     if cancelAction != nil && cancelActionTitle != "" && primaryActionTitle != "" && showLine {
-                        CustomDivider()
+                        customDivider()
                             .frame(width: 1)
                     }
                     
@@ -112,7 +112,7 @@ struct CustomAlertView<Content: View>: View {
             } else {
                 if let primaryAction, let primaryActionTitle {
                     if showLine {
-                        CustomDivider()
+                        customDivider()
                             .frame(height: 1)
                     }
                     
@@ -132,7 +132,7 @@ struct CustomAlertView<Content: View>: View {
                 }
                 
                 if let cancelAction, let cancelActionTitle {
-                    CustomDivider()
+                    customDivider()
                         .frame(height: 1)
                     
                     Button {
@@ -155,12 +155,11 @@ struct CustomAlertView<Content: View>: View {
         .padding(.horizontal, 30)
     }
     
-    func CustomDivider() -> some View {
+    func customDivider() -> some View {
         Divider().overlay(Color.gray)
     }
     
 }
-
 
 extension CustomAlertView where Content == EmptyView {
     

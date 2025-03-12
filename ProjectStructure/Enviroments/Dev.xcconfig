@@ -1,0 +1,13 @@
+//
+//  Dev.xcconfig
+//  ProjectStructure
+//
+//  Created by Thanh Sau on 11/3/25.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+APP_NAME = Dev-ProjectStructure
+APP_ENV = Dev
+APP_URL = https:\/\/dummyjson.com

@@ -138,6 +138,7 @@
       }
     },
     "Root View" : {
+      "extractionState" : "stale",
       "localizations" : {
         "vi" : {
           "stringUnit" : {

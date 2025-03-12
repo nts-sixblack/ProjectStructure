@@ -9,7 +9,7 @@ class RoutesHolder: ObservableObject {
   @Published var routes: [Route<AnyHashable>] = [] {
     didSet {
       task?.cancel()
-      task = _withDelaysIfUnsupported(\.delayedRoutes, transform: { $0 = routes })
+      task = withDelaysItemIfUnsupported(\.delayedRoutes, transform: { $0 = routes })
     }
   }
   @Published var delayedRoutes: [Route<AnyHashable>] = []

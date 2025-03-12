@@ -8,9 +8,7 @@
 import Foundation
 import Alamofire
 
-import Alamofire
-
-class GitNetworkLogger: EventMonitor {
+final class GitNetworkLogger: EventMonitor {
     
     let queue = DispatchQueue(label: "com.sixblack.network.logger")
     
@@ -31,4 +29,3 @@ class GitNetworkLogger: EventMonitor {
 //        }
     }
 }
-

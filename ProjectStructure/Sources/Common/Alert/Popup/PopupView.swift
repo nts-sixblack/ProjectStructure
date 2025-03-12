@@ -11,11 +11,21 @@ import SwiftUI
 import SwiftUIIntrospect
 #endif
 
+/// Represents the different sources that can trigger a dismissal event.
 public enum DismissSource {
-    case binding // set isPresented to false ot item to nil
+    /// Dismissed by setting `isPresented` to `false` or `item` to `nil`.
+    case binding
+
+    /// Dismissed by tapping inside the view.
     case tapInside
+
+    /// Dismissed by tapping outside the view.
     case tapOutside
+
+    /// Dismissed by dragging the view.
     case drag
+
+    /// Dismissed automatically after a timeout.
     case autohide
 }
 
@@ -26,9 +36,9 @@ public struct Popup<PopupContent: View>: ViewModifier {
          popupPresented: Bool,
          shouldShowContent: Bool,
          showContent: Bool,
-         positionIsCalculatedCallback: @escaping () -> (),
-         animationCompletedCallback: @escaping () -> (),
-         dismissCallback: @escaping (DismissSource)->()) {
+         positionIsCalculatedCallback: @escaping () -> Void,
+         animationCompletedCallback: @escaping () -> Void,
+         dismissCallback: @escaping (DismissSource) -> Void) {
 
         self.type = params.type
         self.position = params.position ?? params.type.defaultPosition
@@ -176,10 +186,10 @@ public struct Popup<PopupContent: View>: ViewModifier {
         var useKeyboardSafeArea: Bool = false
 
         /// called when when dismiss animation starts
-        var willDismissCallback: (DismissSource) -> () = {_ in}
+        var willDismissCallback: (DismissSource) -> Void = { _ in }
 
         /// called when when dismiss animation ends
-        var dismissCallback: (DismissSource) -> () = {_ in}
+        var dismissCallback: (DismissSource) -> Void = { _ in }
 
         public func type(_ type: PopupType) -> PopupParameters {
             var params = self
@@ -251,7 +261,7 @@ public struct Popup<PopupContent: View>: ViewModifier {
             return params
         }
 
-        public func backgroundView<BackgroundView: View>(_ backgroundView: ()->(BackgroundView)) -> PopupParameters {
+        public func backgroundView<BackgroundView: View>(_ backgroundView: () -> (BackgroundView)) -> PopupParameters {
             var params = self
             params.backgroundView = AnyView(backgroundView())
             return params
@@ -271,13 +281,13 @@ public struct Popup<PopupContent: View>: ViewModifier {
 
         // MARK: - dismiss callbacks
 
-        public func willDismissCallback(_ dismissCallback: @escaping (DismissSource) -> ()) -> PopupParameters {
+        public func willDismissCallback(_ dismissCallback: @escaping (DismissSource) -> Void ) -> PopupParameters {
             var params = self
             params.willDismissCallback = dismissCallback
             return params
         }
 
-        public func willDismissCallback(_ dismissCallback: @escaping () -> ()) -> PopupParameters {
+        public func willDismissCallback(_ dismissCallback: @escaping () -> Void ) -> PopupParameters {
             var params = self
             params.willDismissCallback = { _ in
                 dismissCallback()
@@ -286,19 +296,19 @@ public struct Popup<PopupContent: View>: ViewModifier {
         }
 
         @available(*, deprecated, renamed: "dismissCallback")
-        public func dismissSourceCallback(_ dismissCallback: @escaping (DismissSource) -> ()) -> PopupParameters {
+        public func dismissSourceCallback(_ dismissCallback: @escaping (DismissSource) -> Void ) -> PopupParameters {
             var params = self
             params.dismissCallback = dismissCallback
             return params
         }
 
-        public func dismissCallback(_ dismissCallback: @escaping (DismissSource) -> ()) -> PopupParameters {
+        public func dismissCallback(_ dismissCallback: @escaping (DismissSource) -> Void ) -> PopupParameters {
             var params = self
             params.dismissCallback = dismissCallback
             return params
         }
 
-        public func dismissCallback(_ dismissCallback: @escaping () -> ()) -> PopupParameters {
+        public func dismissCallback(_ dismissCallback: @escaping () -> Void ) -> PopupParameters {
             var params = self
             params.dismissCallback = { _ in
                 dismissCallback()
@@ -365,13 +375,13 @@ public struct Popup<PopupContent: View>: ViewModifier {
     var showContent: Bool
 
     /// called when all the offsets are calculated, so everything is ready for animation
-    var positionIsCalculatedCallback: () -> ()
+    var positionIsCalculatedCallback: () -> Void
 
     /// called on showing/hiding sliding animation completed
-    var animationCompletedCallback: () -> ()
+    var animationCompletedCallback: () -> Void
 
     /// Call dismiss callback with dismiss source
-    var dismissCallback: (DismissSource)->()
+    var dismissCallback: (DismissSource) -> Void
 
     var view: () -> PopupContent
 
@@ -523,8 +533,7 @@ public struct Popup<PopupContent: View>: ViewModifier {
     private var hiddenScale: CGFloat {
         if popupPresented, calculatedAppearFrom == .centerScale {
             return 0
-        }
-        else if !popupPresented, calculatedDisappearTo == .centerScale {
+        } else if !popupPresented, calculatedDisappearTo == .centerScale {
             return 0
         }
         return 1
@@ -706,7 +715,7 @@ public struct Popup<PopupContent: View>: ViewModifier {
                     }
                 }
 
-                .onChange(of: sheetContentRect.size) { sheetContentRect in
+                .onChange(of: sheetContentRect.size) { _ in
                     positionIsCalculatedCallback()
                     if shouldShowContent { // already displayed but the size has changed
                         actualCurrentOffset = targetCurrentOffset
@@ -754,7 +763,7 @@ public struct Popup<PopupContent: View>: ViewModifier {
                     }
                 }
 
-                .onChange(of: sheetContentRect.size) { sheetContentRect in
+                .onChange(of: sheetContentRect.size) { _ in
                     positionIsCalculatedCallback()
                 }
 #if os(iOS)
@@ -788,7 +797,7 @@ public struct Popup<PopupContent: View>: ViewModifier {
     }
 
     func changeParamsWithAnimation(_ isDisplayAnimation: Bool) {
-        self.actualCurrentOffset = isDisplayAnimation ? CGPointMake(displayedOffsetX, displayedOffsetY) : hiddenOffset
+        self.actualCurrentOffset = isDisplayAnimation ? CGPoint(x: displayedOffsetX, y: displayedOffsetY) : hiddenOffset
         self.actualScale = isDisplayAnimation ? displayedScale : hiddenScale
     }
 

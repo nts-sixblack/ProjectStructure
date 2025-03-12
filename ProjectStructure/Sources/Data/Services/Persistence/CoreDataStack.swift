@@ -34,7 +34,7 @@ struct CoreDataStack: PersistentStore {
             container.persistentStoreDescriptions = [store]
         }
         bgQueue.async { [weak isStoreLoaded, weak container] in
-            container?.loadPersistentStores { (storeDescription, error) in
+            container?.loadPersistentStores { _, error in
                 DispatchQueue.main.async {
                     if let error = error {
                         isStoreLoaded?.send(completion: .failure(error))
@@ -74,9 +74,9 @@ struct CoreDataStack: PersistentStore {
                                               useCache: true) { [weak context] in
                         let object = managedObjects[$0]
                         let mapped = try map(object)
-                        if let mo = object as? NSManagedObject {
+                        if let managerObject = object as? NSManagedObject {
                             // Turning object into a fault
-                            context?.refresh(mo, mergeChanges: false)
+                            context?.refresh(managerObject, mergeChanges: false)
                         }
                         return mapped
                     }

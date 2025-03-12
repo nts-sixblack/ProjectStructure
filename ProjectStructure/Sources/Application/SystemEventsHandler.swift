@@ -26,8 +26,6 @@ struct RealSystemEventsHandler: SystemEventsHandler {
     let pushNotificationsHandler: PushNotificationsHandler
     private let cancelBag = CancelBag()
     
-    
-    
     init(container: DIContainer,
          deepLinksHandler: DeepLinksHandler,
          pushNotificationsHandler: PushNotificationsHandler) {

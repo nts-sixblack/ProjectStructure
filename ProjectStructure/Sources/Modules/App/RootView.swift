@@ -21,7 +21,9 @@ struct RootView: View {
         FlowStack($viewModel.path, withNavigation: true) {
             VStack {
                 Text("Hello, World!")
-                Text("Root View")
+                Text(AppConstant.appName)
+                Text(AppConstant.appEnv)
+                Text(AppConstant.url)
                 
                 Button {
                     viewModel.openHomeView()
@@ -74,23 +76,20 @@ struct RootView: View {
                 case .data: DataView(viewModel: .init())
                 }
             }
-            .onReceive(pathUpdate) { path in
-                DispatchQueue.main.async {
-//                    viewModel.path = path
-                }
+            .onReceive(pushNotificationUpdate) {
+                self.showButtonPermission = $0
+                print($0)
             }
-            .onReceive(pushNotificationUpdate) { self.showButtonPermission = $0 }
-            .onReceive(allowImageUpdate) { self.showButtonPhotoPermission = $0 }
+            .onReceive(allowImageUpdate) {
+                self.showButtonPhotoPermission = $0
+                print($0)
+            }
         }
     }
 }
 
 // MARK: - State update
 private extension RootView {
-    private var pathUpdate: AnyPublisher<FlowPath, Never> {
-        injected.appState.updates(for: \.path)
-    }
-    
     private var pushNotificationUpdate: AnyPublisher<Bool, Never> {
         injected.appState.updates(for: \.permissions.pushNotification)
             .map { $0 == .notRequested || $0 == .denied }
@@ -102,6 +101,5 @@ private extension RootView {
             .map { $0 == .notRequested || $0 == .denied }
             .eraseToAnyPublisher()
     }
-    
     
 }

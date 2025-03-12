@@ -23,7 +23,7 @@ struct MainApp: App {
 
 extension AppEnvironment {
     var rootView: some View {
-        RootView(viewModel: .init())
+        RootView(viewModel: .init(container: container))
             .modifier(RootViewAppearance())
             .attachEnvironmentOverrides(onChange: onChangeHandler)
             .inject(container)

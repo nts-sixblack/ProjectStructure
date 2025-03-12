@@ -14,7 +14,7 @@ struct AppState: Equatable {
     var path = FlowPath()
     var system = System()
     var permissions = Permissions()
-    var test : Bool = false
+    var test: Bool = false
 }
 
 extension AppState {
@@ -46,18 +46,11 @@ extension AppState {
         switch permission {
         case .pushNotifications:
             return pathToPermissions.appending(path: \.pushNotification)
-        case .photoLibrary(_):
+        case .photoLibrary:
             return pathToPermissions.appending(path: \.photoLibrary)
         }
     }
 }
-
-//func == (lhs: AppState, rhs: AppState) -> Bool {
-//    return lhs.userData == rhs.userData &&
-//        lhs.routing == rhs.routing &&
-//        lhs.system == rhs.system &&
-//        lhs.permissions == rhs.permissions
-//}
 
 #if DEBUG
 extension AppState {

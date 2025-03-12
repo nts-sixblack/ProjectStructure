@@ -27,7 +27,6 @@ extension UNUserNotificationCenter: SystemNotificationsCenter {
 
 extension UNAuthorizationStatus {
     var map: Permission.Status {
-        print(self.rawValue)
         switch self {
         case .denied: return .denied
         case .authorized: return .granted

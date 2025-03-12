@@ -46,9 +46,9 @@ extension Loadable {
                 self = .loaded(last)
             } else {
                 let error = NSError(
-                    domain: NSCocoaErrorDomain, code: NSUserCancelledError,
-                    userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Canceled by user",
-                                                                            comment: "")])
+                    domain: NSCocoaErrorDomain,
+                    code: NSUserCancelledError,
+                    userInfo: [NSLocalizedDescriptionKey: NSLocalizedString("Canceled by user", comment: "")])
                 self = .failed(error)
             }
         default: break

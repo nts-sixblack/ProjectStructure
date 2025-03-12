@@ -46,7 +46,7 @@ extension View {
     }
 
     @ViewBuilder
-    func addTapIfNotTV(if condition: Bool, onTap: @escaping ()->()) -> some View {
+    func addTapIfNotTV(if condition: Bool, onTap: @escaping () -> Void ) -> some View {
 #if os(tvOS)
         self
 #else
@@ -114,6 +114,10 @@ struct SafeAreaGetter: ViewModifier {
 }
 
 extension View {
+    /// Attaches a modifier to retrieve the safe area insets of the view.
+    ///
+    /// - Parameter safeArea: A binding to an `EdgeInsets` value that will be updated with the view's safe area insets.
+    /// - Returns: A modified view that updates the provided `safeArea` binding with the current safe area insets.
     public func safeAreaGetter(_ safeArea: Binding<EdgeInsets>) -> some View {
         modifier(SafeAreaGetter(safeArea: safeArea))
     }
@@ -170,10 +174,10 @@ struct AnimatableModifierDouble: AnimatableModifier {
             checkIfFinished()
         }
     }
-    var completion: () -> ()
+    var completion: () -> Void
 
     // Re-created every time the control argument changes
-    init(bindedValue: Double, completion: @escaping () -> ()) {
+    init(bindedValue: Double, completion: @escaping () -> Void ) {
         self.completion = completion
 
         // Set animatableData to the new value. But SwiftUI again directly
@@ -185,7 +189,7 @@ struct AnimatableModifierDouble: AnimatableModifier {
         AnimatableModifierDouble.done = false
     }
 
-    func checkIfFinished() -> () {
+    func checkIfFinished() {
         if AnimatableModifierDouble.done { return }
         let delta = 0.1
         if animatableData > targetValue - delta &&
@@ -218,22 +222,23 @@ extension View {
     func transparentNonAnimatingFullScreenCover<Content: View>(
         isPresented: Binding<Bool>,
         dismissSource: DismissSource?,
-        userDismissCallback: @escaping (DismissSource) -> (),
+        userDismissCallback: @escaping (DismissSource) -> Void,
         content: @escaping () -> Content) -> some View {
             modifier(TransparentNonAnimatableFullScreenModifier(isPresented: isPresented, dismissSource: dismissSource, userDismissCallback: userDismissCallback, fullScreenContent: content))
     }
 }
 
+// swiftlint:disable:next type_name
 private struct TransparentNonAnimatableFullScreenModifier<FullScreenContent: View>: ViewModifier {
 
     @Binding var isPresented: Bool
     var dismissSource: DismissSource?
-    var userDismissCallback: (DismissSource) -> ()
+    var userDismissCallback: (DismissSource) -> Void
     let fullScreenContent: () -> (FullScreenContent)
 
     func body(content: Content) -> some View {
         content
-            .onChange(of: isPresented) { isPresented in
+            .onChange(of: isPresented) { _ in
                 UIView.setAnimationsEnabled(false)
             }
             .fullScreenCover(isPresented: $isPresented, content: {
@@ -294,7 +299,7 @@ class KeyboardHeightHelper: ObservableObject {
     private func listenForKeyboardNotifications() {
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification,
                                                object: nil,
-                                               queue: .main) { (notification) in
+                                               queue: .main) { notification in
             guard let userInfo = notification.userInfo,
                   let keyboardRect = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
 
@@ -304,7 +309,7 @@ class KeyboardHeightHelper: ObservableObject {
 
         NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification,
                                                object: nil,
-                                               queue: .main) { (notification) in
+                                               queue: .main) { _ in
             self.keyboardHeight = 0
             self.keyboardDisplayed = false
         }
@@ -320,7 +325,6 @@ class KeyboardHeightHelper: ObservableObject {
 }
 
 #endif
-
 
 // MARK: - Hide keyboard
 

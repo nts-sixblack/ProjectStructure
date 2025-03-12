@@ -17,8 +17,10 @@
 /* Begin PBXFileReference section */
 		726C9C8EB14646C52B1B23EF /* Pods_ProjectStructure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjectStructure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8097CECD2DA0111DA076188D /* Pods-ProjectStructure.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectStructure.release.xcconfig"; path = "Target Support Files/Pods-ProjectStructure/Pods-ProjectStructure.release.xcconfig"; sourceTree = "<group>"; };
+		94A325124AF7C15D4CB1CDF5 /* Pods-ProjectStructure.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectStructure.dev.xcconfig"; path = "Target Support Files/Pods-ProjectStructure/Pods-ProjectStructure.dev.xcconfig"; sourceTree = "<group>"; };
 		AFB7AB192CEB790D007C8CD4 /* ProjectStructure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectStructure.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BACE6BA0329E5112A3875758 /* Pods-ProjectStructure.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectStructure.debug.xcconfig"; path = "Target Support Files/Pods-ProjectStructure/Pods-ProjectStructure.debug.xcconfig"; sourceTree = "<group>"; };
+		E395EE0C42E413A7C0811433 /* Pods-ProjectStructure.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectStructure.staging.xcconfig"; path = "Target Support Files/Pods-ProjectStructure/Pods-ProjectStructure.staging.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -89,8 +91,9 @@
 			children = (
 				BACE6BA0329E5112A3875758 /* Pods-ProjectStructure.debug.xcconfig */,
 				8097CECD2DA0111DA076188D /* Pods-ProjectStructure.release.xcconfig */,
+				94A325124AF7C15D4CB1CDF5 /* Pods-ProjectStructure.dev.xcconfig */,
+				E395EE0C42E413A7C0811433 /* Pods-ProjectStructure.staging.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -105,6 +108,7 @@
 				AFB7AB152CEB790D007C8CD4 /* Sources */,
 				AFB7AB162CEB790D007C8CD4 /* Frameworks */,
 				AFB7AB172CEB790D007C8CD4 /* Resources */,
+				AF2ECFAD2D809A520025B167 /* SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -177,6 +181,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		AF2ECFAD2D809A520025B167 /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n#alias swiftlint=\"/opt/homebrew/bin/swiftlint\"\n\nswiftlint\n\n# Update a temporary file so that Xcode recognizes the process as completed\ntouch \"$DERIVED_FILE_DIR/swiftlint.timestamp\"\n";
+		};
 		F1340CCA422C5BE1016C3D16 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -212,8 +234,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		AFB7AB252CEB790E007C8CD4 /* Debug */ = {
+		AF2ECB2B2D808E2D0025B167 /* Staging */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = AFB7AB1B2CEB790D007C8CD4 /* ProjectStructure */;
+			baseConfigurationReferenceRelativePath = Enviroments/Staging.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -274,10 +298,117 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Debug;
+			name = Staging;
+		};
+		AF2ECB2C2D808E2D0025B167 /* Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E395EE0C42E413A7C0811433 /* Pods-ProjectStructure.staging.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ProjectStructure/Preview Content\"";
+				DEVELOPMENT_TEAM = JA7LR8633A;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ProjectStructure/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ProjectStructure;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Request photo";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Request photo";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = nts.sixblack.ProjectStructure;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Staging;
+		};
+		AFB7AB252CEB790E007C8CD4 /* Dev */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = AFB7AB1B2CEB790D007C8CD4 /* ProjectStructure */;
+			baseConfigurationReferenceRelativePath = Enviroments/Dev.xcconfig;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Dev;
 		};
 		AFB7AB262CEB790E007C8CD4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = AFB7AB1B2CEB790D007C8CD4 /* ProjectStructure */;
+			baseConfigurationReferenceRelativePath = Enviroments/Release.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -333,19 +464,23 @@
 			};
 			name = Release;
 		};
-		AFB7AB282CEB790E007C8CD4 /* Debug */ = {
+		AFB7AB282CEB790E007C8CD4 /* Dev */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BACE6BA0329E5112A3875758 /* Pods-ProjectStructure.debug.xcconfig */;
+			baseConfigurationReference = 94A325124AF7C15D4CB1CDF5 /* Pods-ProjectStructure.dev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ProjectStructure/Preview Content\"";
 				DEVELOPMENT_TEAM = JA7LR8633A;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ProjectStructure/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Dev-ProjectStructure";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Request photo";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Request photo";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -366,21 +501,25 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = Dev;
 		};
 		AFB7AB292CEB790E007C8CD4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8097CECD2DA0111DA076188D /* Pods-ProjectStructure.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ProjectStructure/Preview Content\"";
 				DEVELOPMENT_TEAM = JA7LR8633A;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ProjectStructure/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Staging-ProjectStructure";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Request photo";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Request photo";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -409,7 +548,8 @@
 		AFB7AB142CEB790D007C8CD4 /* Build configuration list for PBXProject "ProjectStructure" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AFB7AB252CEB790E007C8CD4 /* Debug */,
+				AFB7AB252CEB790E007C8CD4 /* Dev */,
+				AF2ECB2B2D808E2D0025B167 /* Staging */,
 				AFB7AB262CEB790E007C8CD4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -418,7 +558,8 @@
 		AFB7AB272CEB790E007C8CD4 /* Build configuration list for PBXNativeTarget "ProjectStructure" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AFB7AB282CEB790E007C8CD4 /* Debug */,
+				AFB7AB282CEB790E007C8CD4 /* Dev */,
+				AF2ECB2C2D808E2D0025B167 /* Staging */,
 				AFB7AB292CEB790E007C8CD4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

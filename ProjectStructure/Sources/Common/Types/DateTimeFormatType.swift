@@ -45,4 +45,3 @@ enum DateTimeFormatType: String {
     case dateTimeSlashWithSeparator = "YYYY/MM/dd | hh:mm a"
     case monthAndYear = "MMM yyyy"
 }
-
