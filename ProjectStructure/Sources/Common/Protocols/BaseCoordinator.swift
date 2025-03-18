@@ -13,7 +13,7 @@ protocol BaseAlert: Equatable {
 protocol BaseFullScreen: Hashable, Codable {
 }
 
-protocol BaseNavigation: Hashable, Codable {
+protocol BaseNavigation: Codable {
 }
 
 struct DefaultAlert: BaseAlert { }

@@ -12,4 +12,5 @@ protocol BaseViewModel: ObservableObject {
     associatedtype CoordinatorType: BaseCoordinator
     
     var coordinator: CoordinatorType { get }
+    var isLoading: Bool { get set }
 }

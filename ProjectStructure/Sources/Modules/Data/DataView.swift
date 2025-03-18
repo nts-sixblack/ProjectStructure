@@ -12,26 +12,28 @@ struct DataView: View {
     @ObservedObject var viewModel: ViewModel
     
     var body: some View {
-        VStack {
-//            switch viewModel.persons {
-//            case .notRequested:
-//                Text("Loading").onAppear { viewModel.getPerson() }
-//            case let .isLoading(last, _):
-//                loadingView(last)
-//            case let .loaded(persons):
-//                loadedView(persons)
-//            case let .failed(error):
-//                Text(error.localizedDescription)
-//            }
-            
-            Text("Content")
-                .font(FontFamily.Roboto.boldItalic.swiftUIFont(size: 18))
-            
-            Text("Content")
-                .font(FontFamily.Roboto.boldItalic.swiftUIFont(fixedSize: 18))
-            
-            Text("Content")
-                .font(FontFamily.Roboto.boldItalic.swiftUIFont(size: 18, relativeTo: .caption2))
+        BaseView(viewModel: viewModel) {
+            VStack {
+                switch viewModel.persons {
+                case .notRequested:
+                    Text("Loading").onAppear { viewModel.getPerson() }
+                case let .isLoading(last, _):
+                    loadingView(last)
+                case let .loaded(persons):
+                    loadedView(persons)
+                case let .failed(error):
+                    Text(error.localizedDescription)
+                }
+                
+                Text("Content")
+                    .font(FontFamily.Roboto.boldItalic.swiftUIFont(size: 18))
+                
+                Text("Content")
+                    .font(FontFamily.Roboto.boldItalic.swiftUIFont(fixedSize: 18))
+                
+                Text("Content")
+                    .font(FontFamily.Roboto.boldItalic.swiftUIFont(size: 18, relativeTo: .caption2))
+            }
         }
     }
 }

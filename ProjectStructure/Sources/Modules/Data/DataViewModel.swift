@@ -16,6 +16,7 @@ extension DataView {
         private var databaseService: DatabaseService
         
         @Published var coordinator = Coordinator()
+        @Published var isLoading: Bool = false
         @Published var persons: Loadable<LazyList<Person>>
         
         var cancelBag = CancelBag()

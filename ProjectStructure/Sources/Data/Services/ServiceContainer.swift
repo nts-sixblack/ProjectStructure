@@ -14,4 +14,5 @@ class ServiceContainer {
     lazy var localStorageService: LocalStorageService = UserDefaultService()
     lazy var databaseService: DatabaseService = DatabaseService(repository: DatabaseRepositories())
     lazy var apiService: APIService = APIService()
+    lazy var fileStorageManager: FileStorageManager = FileStorageManager()
 }

@@ -190,6 +190,20 @@ public struct Popup<PopupContent: View>: ViewModifier {
 
         /// called when when dismiss animation ends
         var dismissCallback: (DismissSource) -> Void = { _ in }
+        
+        public func centerPopup() -> PopupParameters {
+            var params = self
+            params.position = .center
+            params.animation = .easeIn
+            params.appearFrom = .centerScale
+            params.backgroundColor = .black.opacity(0.3)
+            params.closeOnTap = false
+            params.closeOnTapOutside = true
+            params.disappearTo = .centerScale
+            params.isOpaque = true
+            params.dragToDismiss = false
+            return params
+        }
 
         public func type(_ type: PopupType) -> PopupParameters {
             var params = self

@@ -72,3 +72,17 @@ struct ScreenModifier<Data: Hashable>: ViewModifier {
   private let didBecomeActive = UIApplication.didBecomeActiveNotification
   private let willResignActive = UIApplication.willResignActiveNotification
 #endif
+
+struct NavigatorModifier: ViewModifier {
+    
+    @EnvironmentObject var navigator: FlowPathNavigator
+    
+    func body(content: Content) -> some View {
+        content
+            .onFirstAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    FlowNavigatorHolder.shared.navigator = navigator
+                }
+            }
+    }
+}

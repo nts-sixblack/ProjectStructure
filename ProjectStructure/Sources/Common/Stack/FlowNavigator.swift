@@ -18,3 +18,24 @@ public class FlowNavigator<Screen>: ObservableObject {
     self.routesBinding = routesBinding
   }
 }
+
+final class FlowNavigatorHolder {
+    static let shared = FlowNavigatorHolder()
+    var navigator: FlowPathNavigator?
+    
+    private init() {}
+}
+
+@propertyWrapper
+struct Navigation {
+    private var navigator: FlowPathNavigator {
+        guard let navigator = FlowNavigatorHolder.shared.navigator else {
+            fatalError("FlowPathNavigator chưa được khởi tạo. Đảm bảo bạn đã inject nó vào môi trường.")
+        }
+        return navigator
+    }
+
+    var wrappedValue: FlowPathNavigator {
+        navigator
+    }
+}

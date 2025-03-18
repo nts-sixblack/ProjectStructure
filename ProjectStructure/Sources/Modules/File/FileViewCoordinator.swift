@@ -1,13 +1,13 @@
 //
-//  HomeViewCoordinator.swift
+//  FileViewCoordinator.swift
 //  ProjectStructure
 //
-//  Created by Thanh Sau on 20/11/24.
+//  Created by Thanh Sau on 17/3/25.
 //
 
 import Foundation
 
-extension HomeView {
+extension FileView {
     struct Coordinator: BaseCoordinator {
         
         enum Alert: BaseAlert {
@@ -15,14 +15,8 @@ extension HomeView {
             case success(title: String, message: String)
         }
         
-        enum FullScreen: BaseFullScreen {
-            case viewController
-        }
-        
         enum Navigation: BaseNavigation {
-            case view1
-            case view2
-            case file
+            case subView
         }
 
         var alert: Alert?

@@ -12,10 +12,7 @@ import Combine
 struct RootView: View {
     
     @Environment(\.injected) private var injected: DIContainer
-    
     @ObservedObject var viewModel: ViewModel
-    @State private var showButtonPermission: Bool = false
-    @State private var showButtonPhotoPermission: Bool = false
     
     var body: some View {
         FlowStack($viewModel.path, withNavigation: true) {
@@ -48,58 +45,17 @@ struct RootView: View {
                 } label: {
                     Text("Data View")
                 }
-                
-                if showButtonPermission {
-                    Button {
-                        injected.userPermissions.request(permission: .pushNotifications)
-                    } label: {
-                        Text("Request push notification")
-                    }
-                }
-                
-                if showButtonPhotoPermission {
-                    Button {
-                        injected.userPermissions.request(permission: .photoLibrary(accessLevel: .readWrite))
-                    } label: {
-                        Text("Request photo permission")
-                    }
-
-                }
-
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.white)
+            .modifier(NavigatorModifier())
             .flowDestination(for: Coordinator.Navigation.self) { item in
                 switch item {
-                case .home: HomeView(viewModel: .init())
+                case .home: HomeView(viewModel: .init(container: injected))
                 case .settings: SettingView(viewModel: .init())
                 case .data: DataView(viewModel: .init())
                 }
             }
-            .onReceive(pushNotificationUpdate) {
-                self.showButtonPermission = $0
-                print($0)
-            }
-            .onReceive(allowImageUpdate) {
-                self.showButtonPhotoPermission = $0
-                print($0)
-            }
         }
     }
-}
-
-// MARK: - State update
-private extension RootView {
-    private var pushNotificationUpdate: AnyPublisher<Bool, Never> {
-        injected.appState.updates(for: \.permissions.pushNotification)
-            .map { $0 == .notRequested || $0 == .denied }
-            .eraseToAnyPublisher()
-    }
-    
-    private var allowImageUpdate: AnyPublisher<Bool, Never> {
-        injected.appState.updates(for: \.permissions.photoLibrary)
-            .map { $0 == .notRequested || $0 == .denied }
-            .eraseToAnyPublisher()
-    }
-    
 }

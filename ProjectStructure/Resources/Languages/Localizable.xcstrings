@@ -11,6 +11,12 @@
         }
       }
     },
+    "Add new file" : {
+
+    },
+    "Add new folder" : {
+
+    },
     "Canceled by user" : {
       "localizations" : {
         "vi" : {
@@ -51,6 +57,9 @@
         }
       }
     },
+    "File View" : {
+
+    },
     "Get user data" : {
       "localizations" : {
         "vi" : {
@@ -86,6 +95,9 @@
           }
         }
       }
+    },
+    "Loading" : {
+
     },
     "Login" : {
       "localizations" : {
