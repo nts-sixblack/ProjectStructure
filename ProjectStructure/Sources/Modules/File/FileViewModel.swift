@@ -7,11 +7,13 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 extension FileView {
     class ViewModel: BaseViewModel {
         @Service(\.fileStorageManager)
         private var fileStorageManager
+        
         @Navigation var navigation
         
         @Published var coordinator: Coordinator = Coordinator()
@@ -27,18 +29,22 @@ extension FileView {
         
         func onSelectedItem(item: FileItem) {
             selectedFile = item
-            DispatchQueue.main.async {
-                self.navigation.push(Coordinator.Navigation.subView)
+            DispatchQueue.main.async { [unowned self] in
+                navigation.push(Coordinator.Navigation.subView)
             }
         }
         
         func addNewFolder() {
-            rootFile.createSubfolder(child: "Foldername")
+            fileStorageManager.createFolder(name: "NewFolder", in: rootFile)
+                .receive(on: DispatchQueue.main)
                 .sink(receiveCompletion: { completion in
                     if case let .failure(error) = completion {
                         self.coordinator.alert = .error(title: "Error", message: error.localizedDescription)
                     }
-                }, receiveValue: { })
+                }, receiveValue: { [unowned self] newFolder in
+                    rootFile.children.append(newFolder)
+                    rootFile.children.sort(by: >)
+                })
                 .store(in: cancelBag)
         }
         
@@ -46,12 +52,16 @@ extension FileView {
             let string = "abcxyz"
             let data: Data = string.data(using: .utf8)!
             
-            rootFile.createFile(from: data, name: "name", type: .plainText)
+            fileStorageManager.createFile(name: "FileName", from: data, type: .plainText, in: rootFile)
+                .receive(on: DispatchQueue.main)
                 .sink(receiveCompletion: { completion in
                     if case let .failure(error) = completion {
                         self.coordinator.alert = .error(title: "Error", message: error.localizedDescription)
                     }
-                }, receiveValue: { })
+                }, receiveValue: { [unowned self] newFolder in
+                    rootFile.children.append(newFolder)
+                    rootFile.children.sort(by: >)
+                })
                 .store(in: cancelBag)
         }
     }

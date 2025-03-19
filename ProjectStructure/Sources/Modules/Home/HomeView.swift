@@ -120,7 +120,7 @@ struct HomeView: View {
             switch item {
             case .view1: Text("View 1")
             case .view2: Text("View 2")
-            case .file: FileView(viewModel: .init(rootFile: viewModel.fileStorageManager.rootFolder), fileItem: viewModel.fileStorageManager.rootFolder)
+            case .file: FileView(viewModel: .init(rootFile: viewModel.fileStorageManager.rootFolder))
             }
         }
         .flowDestination(for: Coordinator.FullScreen.self) { item in

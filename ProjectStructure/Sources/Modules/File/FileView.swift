@@ -10,7 +10,6 @@ import SwiftUI
 struct FileView: View {
     
     @ObservedObject var viewModel: ViewModel
-    @ObservedObject var fileItem: FileItem
     
     var body: some View {
         BaseView(viewModel: viewModel) {
@@ -76,7 +75,7 @@ struct FileView: View {
             switch item {
             case .subView:
                 if let file = viewModel.selectedFile {
-                    FileView(viewModel: .init(rootFile: file), fileItem: file)
+                    FileView(viewModel: .init(rootFile: file))
                 } else {
                     EmptyView()
                 }
@@ -86,5 +85,5 @@ struct FileView: View {
 }
 
 #Preview {
-    FileView(viewModel: .init(rootFile: .init(from: "CacheFile")!), fileItem: .init(from: "CacheFile")!)
+    FileView(viewModel: .init(rootFile: .init(from: "CacheFile")!))
 }
