@@ -1,7 +1,8 @@
 // swiftlint:disable all
 // Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
 
-#if os(macOS)
+
+#if os(OSX)
   import AppKit.NSFont
 #elseif os(iOS) || os(tvOS) || os(watchOS)
   import UIKit.UIFont
@@ -12,9 +13,10 @@
 
 // Deprecated typealiases
 @available(*, deprecated, renamed: "FontConvertible.Font", message: "This typealias will be removed in SwiftGen 7.0")
-internal typealias Font = FontConvertible.Font
+internal typealias SystemFont = FontConvertible.SystemFont
 
-// swiftlint:disable superfluous_disable_command file_length implicit_return
+// swiftlint:disable superfluous_disable_command
+// swiftlint:disable file_length
 
 // MARK: - Fonts
 
@@ -55,42 +57,44 @@ internal struct FontConvertible {
   internal let family: String
   internal let path: String
 
-  #if os(macOS)
-  internal typealias Font = NSFont
+  #if os(OSX)
+  internal typealias SystemFont = NSFont
   #elseif os(iOS) || os(tvOS) || os(watchOS)
-  internal typealias Font = UIFont
+  internal typealias SystemFont = UIFont
   #endif
 
-  internal func font(size: CGFloat) -> Font {
-    guard let font = Font(font: self, size: size) else {
+  internal func font(size: CGFloat) -> SystemFont {
+    guard let font = SystemFont(font: self, size: size) else {
       fatalError("Unable to initialize font '\(name)' (\(family))")
     }
     return font
   }
-
   #if canImport(SwiftUI)
   @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
-  internal func swiftUIFont(size: CGFloat) -> SwiftUI.Font {
+  internal func font(size: CGFloat) -> SwiftUI.Font {
     return SwiftUI.Font.custom(self, size: size)
   }
 
   @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
-  internal func swiftUIFont(fixedSize: CGFloat) -> SwiftUI.Font {
+  internal func font(fixedSize: CGFloat) -> SwiftUI.Font {
     return SwiftUI.Font.custom(self, fixedSize: fixedSize)
   }
 
   @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
-  internal func swiftUIFont(size: CGFloat, relativeTo textStyle: SwiftUI.Font.TextStyle) -> SwiftUI.Font {
+  internal func font(size: CGFloat, relativeTo textStyle: SwiftUI.Font.TextStyle) -> SwiftUI.Font {
     return SwiftUI.Font.custom(self, size: size, relativeTo: textStyle)
   }
   #endif
+
+  internal func textStyle(_ textStyle: Font.TextStyle) -> Font {
+    Font.mappedFont(name, textStyle: textStyle)
+  }
 
   internal func register() {
     // swiftlint:disable:next conditional_returns_on_newline
     guard let url = url else { return }
     CTFontManagerRegisterFontsForURL(url as CFURL, .process, nil)
   }
-
   fileprivate func registerIfNeeded() {
     #if os(iOS) || os(tvOS) || os(watchOS)
     if !UIFont.fontNames(forFamilyName: family).contains(name) {
@@ -106,13 +110,6 @@ internal struct FontConvertible {
   fileprivate var url: URL? {
     // swiftlint:disable:next implicit_return
     return BundleToken.bundle.url(forResource: path, withExtension: nil)
-  }
-}
-
-internal extension FontConvertible.Font {
-  convenience init?(font: FontConvertible, size: CGFloat) {
-    font.registerIfNeeded()
-    self.init(name: font.name, size: size)
   }
 }
 
@@ -143,6 +140,22 @@ internal extension SwiftUI.Font {
 }
 #endif
 
+internal extension FontConvertible.SystemFont {
+  convenience init?(font: FontConvertible, size: CGFloat) {
+    #if os(iOS) || os(tvOS) || os(watchOS)
+    if !UIFont.fontNames(forFamilyName: font.family).contains(font.name) {
+      font.register()
+    }
+    #elseif os(OSX)
+    if let url = font.url, CTFontManagerGetScopeForURL(url as CFURL) == .none {
+      font.register()
+    }
+    #endif
+
+    self.init(name: font.name, size: size)
+  }
+}
+
 // swiftlint:disable convenience_type
 private final class BundleToken {
   static let bundle: Bundle = {
@@ -153,4 +166,42 @@ private final class BundleToken {
     #endif
   }()
 }
+
+fileprivate extension Font {
+  static func mappedFont(_ name: String, textStyle: TextStyle) -> Font {
+    let fontSize = UIFont.preferredFont(forTextStyle: self.mapToUIFontTextStyle(textStyle)).pointSize
+    return Font.custom(name, size: fontSize, relativeTo: textStyle)
+  }
+
+  // swiftlint:disable:next cyclomatic_complexity
+  static func mapToUIFontTextStyle(_ textStyle: SwiftUI.Font.TextStyle) -> UIFont.TextStyle {
+    switch textStyle {
+    case .largeTitle:
+      return .largeTitle
+    case .title:
+      return .title1
+    case .title2:
+      return .title2
+    case .title3:
+      return .title3
+    case .headline:
+      return .headline
+    case .subheadline:
+      return .subheadline
+    case .callout:
+      return .callout
+    case .body:
+      return .body
+    case .caption:
+      return .caption1
+    case .caption2:
+      return .caption2
+    case .footnote:
+      return .footnote
+    @unknown default:
+      fatalError("Missing a TextStyle mapping")
+    }
+  }
+}
+
 // swiftlint:enable convenience_type

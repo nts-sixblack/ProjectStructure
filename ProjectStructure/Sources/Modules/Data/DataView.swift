@@ -26,13 +26,13 @@ struct DataView: View {
                 }
                 
                 Text("Content")
-                    .font(FontFamily.Roboto.boldItalic.swiftUIFont(size: 18))
+                    .font(FontFamily.Roboto.black.textStyle(.caption))
                 
                 Text("Content")
-                    .font(FontFamily.Roboto.boldItalic.swiftUIFont(fixedSize: 18))
+                    .font(FontFamily.Roboto.boldItalic.font(fixedSize: 18))
                 
                 Text("Content")
-                    .font(FontFamily.Roboto.boldItalic.swiftUIFont(size: 18, relativeTo: .caption2))
+                    .font(FontFamily.Roboto.boldItalic.font(size: 18, relativeTo: .caption2))
             }
         }
     }
