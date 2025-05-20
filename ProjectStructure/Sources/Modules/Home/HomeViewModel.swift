@@ -12,11 +12,9 @@ extension HomeView {
     
     class ViewModel: BaseViewModel {
         
-        @Service(\.apiService)
-        private var apiService: APIService
+        @Injected var apiService: APIService
         
-        @Service(\.fileStorageManager)
-        var fileStorageManager
+        @Injected var fileStorageManager: FileStorageManager
         
         @Navigation var navigator
         

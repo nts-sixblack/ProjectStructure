@@ -21,17 +21,6 @@ struct SettingView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.white)
         .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .resizable()
-                }
-
-            }
-        }
     }
 }
 

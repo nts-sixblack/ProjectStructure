@@ -23,8 +23,22 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         environment.rootView
     }
     
+    let dependencies = Dependencies {
+        Dependency { LocalStorageService() }
+        Dependency { APIService() }
+        Dependency { FileStorageManager() }
+        Dependency { DatabaseService() }
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions
         launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        dependencies.build()
+        dependencies
+            .compactMap { $0 as? Service }
+            .filter { $0.shouldAutostart }
+            .forEach { $0.start() }
+        
         return true
     }
     

@@ -11,9 +11,7 @@ import SwiftUI
 
 extension FileView {
     class ViewModel: BaseViewModel {
-        @Service(\.fileStorageManager)
-        private var fileStorageManager
-        
+        @Injected var fileStorageManager: FileStorageManager
         @Navigation var navigation
         
         @Published var coordinator: Coordinator = Coordinator()

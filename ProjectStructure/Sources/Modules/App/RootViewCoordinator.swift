@@ -11,12 +11,9 @@ extension RootView {
     struct Coordinator: BaseCoordinator {
         
         enum Navigation: BaseNavigation {
-            case home
-            case settings
-            case data
+            case introduce
+            case content
         }
-        
-        var alert: Alert?
 
     }
 }

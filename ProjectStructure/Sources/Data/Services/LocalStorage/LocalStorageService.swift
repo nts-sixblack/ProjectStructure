@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol LocalStorageService: AnyObject {
+protocol UserDefaultService: AnyObject {
     var isFirstTimeOpenApp: Bool { get set }
 }
 
@@ -15,8 +15,8 @@ private struct Keys {
     static let isFirstTimeOpenApp = "isFirstTimeOpenApp"
 }
 
-class UserDefaultService: LocalStorageService {
-    static let shared = UserDefaultService()
+class LocalStorageService: UserDefaultService {
+    static let shared = LocalStorageService()
 
     @ObjectUserDefaultWrapper(key: Keys.isFirstTimeOpenApp, defaultValue: true)
     var isFirstTimeOpenApp: Bool

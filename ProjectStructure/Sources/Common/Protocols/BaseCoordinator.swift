@@ -26,6 +26,6 @@ protocol BaseCoordinator {
     associatedtype Alert: BaseAlert = DefaultAlert
     associatedtype FullScreen: BaseFullScreen = DefaultFullScreen
     associatedtype Navigation: BaseNavigation = DefaultNavigation
-    
-    var alert: Alert? { get set }
 }
+
+struct DefaultCoordinator: BaseCoordinator { }

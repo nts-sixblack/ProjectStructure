@@ -9,9 +9,10 @@ import Foundation
 
 struct DatabaseService {
     
-    let personService: PersonDBService
+    let personRepository: PersonRepository
     
-    init(repository: DatabaseRepositories) {
-        self.personService = RealPersonService(dbRepository: repository.personRepository)
+    init(version: UInt = CoreDataStack.Version.actual) {
+        let persistentStore: CoreDataStack = CoreDataStack(version: version)
+        personRepository = PersonRepository(persistentStore: persistentStore)
     }
 }

@@ -12,9 +12,6 @@ import Combine
 extension RootView {
     class ViewModel: ObservableObject {
         
-        @Service(\.localStorageService)
-        private var localStorageService: LocalStorageService
-        
         @Published var path = FlowPath()
         @Published var coordinator = Coordinator()
         
@@ -29,18 +26,6 @@ extension RootView {
                     }
                 }
                 .store(in: cancelBag)
-        }
-        
-        func openHomeView() {
-            path.push(Coordinator.Navigation.home)
-        }
-        
-        func openSettingView() {
-            path.push(Coordinator.Navigation.settings)
-        }
-        
-        func openDataView() {
-            path.push(Coordinator.Navigation.data)
         }
     }
 }

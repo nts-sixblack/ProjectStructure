@@ -48,6 +48,7 @@
       }
     },
     "Data View" : {
+      "extractionState" : "stale",
       "localizations" : {
         "vi" : {
           "stringUnit" : {
@@ -56,6 +57,9 @@
           }
         }
       }
+    },
+    "Done" : {
+
     },
     "File View" : {
 
@@ -71,6 +75,7 @@
       }
     },
     "Hello, World!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "vi" : {
           "stringUnit" : {
@@ -81,6 +86,7 @@
       }
     },
     "Home View" : {
+      "extractionState" : "stale",
       "localizations" : {
         "da" : {
           "stringUnit" : {
@@ -108,6 +114,9 @@
           }
         }
       }
+    },
+    "Next" : {
+
     },
     "Popup error" : {
       "localizations" : {
@@ -189,6 +198,9 @@
           }
         }
       }
+    },
+    "Splash View" : {
+
     },
     "View 1" : {
       "localizations" : {

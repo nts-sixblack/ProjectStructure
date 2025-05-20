@@ -12,8 +12,7 @@ import CoreData
 extension DataView {
     class ViewModel: BaseViewModel {
         
-//        @Service(\.databaseService)
-        private var databaseService: DatabaseService
+        @Injected var databaseService: DatabaseService
         
         @Published var coordinator = Coordinator()
         @Published var isLoading: Bool = false
@@ -23,12 +22,11 @@ extension DataView {
         
         init(persons: Loadable<LazyList<Person>> = .notRequested) {
             _persons = .init(initialValue: persons)
-            databaseService = DatabaseService(repository: DatabaseRepositories())
         }
         
         func getPerson() {
-            databaseService.personService
-                .load(persons: loadableSubject(\.persons), search: "abc")
+//            databaseService.personRepository
+//                .load(persons: loadableSubject(\.persons), search: "abc")
         }
     }
 }

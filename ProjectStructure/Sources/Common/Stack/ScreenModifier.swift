@@ -80,7 +80,7 @@ struct NavigatorModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .onFirstAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                     FlowNavigatorHolder.shared.navigator = navigator
                 }
             }

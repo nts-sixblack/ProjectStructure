@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import CoreData
 
-protocol PersonRepository {
+protocol PersonRepositoryProtocol {
     func hasLoadedCountries() -> AnyPublisher<Bool, Error>
     
     func getAll() -> AnyPublisher<LazyList<Person>, Error>
@@ -17,7 +17,7 @@ protocol PersonRepository {
     func countries(search: String) -> AnyPublisher<LazyList<Person>, Error>
 }
 
-struct RealPersonRepository: PersonRepository {
+struct PersonRepository: PersonRepositoryProtocol {
     
     let persistentStore: PersistentStore
     
@@ -50,12 +50,7 @@ struct RealPersonRepository: PersonRepository {
     func getAll() -> AnyPublisher<LazyList<Person>, Error> {
         let fetchRequest = PersonMO.fetchRequest()
         return persistentStore
-//            .fetch(fetchRequest, map: {
-//                Person(managedObject: $0)
-//            })
-            .fetch(fetchRequest) {
-                Person(managedObject: $0)
-            }
+            .fetch(fetchRequest) { Person(managedObject: $0) }
             .eraseToAnyPublisher()
     }
 }

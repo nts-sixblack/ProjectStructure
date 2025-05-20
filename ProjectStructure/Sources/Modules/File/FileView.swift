@@ -24,6 +24,36 @@ struct FileView: View {
                     }
                 }
             }
+            .popup(item: $viewModel.coordinator.alert) { item in
+                switch item {
+                case let .error(title, message):
+                    CustomAlertView(
+                        title: title,
+                        titleColor: .red,
+                        description: message,
+                        primaryActionTitle: "OK",
+                        primaryAction: {
+                            viewModel.coordinator.alert = nil
+                        })
+                    
+                case let .success(title, message):
+                    CustomAlertView(
+                        title: title,
+                        description: message,
+                        cancelActionTitle: "Cancel",
+                        cancelAction: {
+                            print("cancel")
+                            viewModel.coordinator.alert = nil
+                        },
+                        primaryActionTitle: "OK",
+                        primaryAction: {
+                            viewModel.coordinator.alert = nil
+                        }
+                    )
+                }
+            } customize: {
+                $0.centerPopup()
+            }
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -40,36 +70,6 @@ struct FileView: View {
                 }
 
             }
-        }
-        .popup(item: $viewModel.coordinator.alert) { item in
-            switch item {
-            case let .error(title, message):
-                CustomAlertView(
-                    title: title,
-                    titleColor: .red,
-                    description: message,
-                    primaryActionTitle: "OK",
-                    primaryAction: {
-                        viewModel.coordinator.alert = nil
-                    })
-                
-            case let .success(title, message):
-                CustomAlertView(
-                    title: title,
-                    description: message,
-                    cancelActionTitle: "Cancel",
-                    cancelAction: {
-                        print("cancel")
-                        viewModel.coordinator.alert = nil
-                    },
-                    primaryActionTitle: "OK",
-                    primaryAction: {
-                        viewModel.coordinator.alert = nil
-                    }
-                )
-            }
-        } customize: {
-            $0.centerPopup()
         }
         .flowDestination(for: Coordinator.Navigation.self) { item in
             switch item {
