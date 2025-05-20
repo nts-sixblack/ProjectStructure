@@ -21,8 +21,8 @@ extension FileView {
         
         private let cancelBag = CancelBag()
         
-        init(rootFile: FileItem) {
-            self.rootFile = rootFile
+        init(rootFile: FileItem?) {
+            self.rootFile = rootFile ?? FileItem(from: "Root")!
         }
         
         func onSelectedItem(item: FileItem) {

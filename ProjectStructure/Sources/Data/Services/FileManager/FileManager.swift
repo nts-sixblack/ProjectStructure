@@ -9,8 +9,8 @@ import Foundation
 import Combine
 import UniformTypeIdentifiers
 
-class FileStorageManager {
-    var rootFolder: FileItem = FileItem(from: "Root")!
+class FileStorageManager: ObservableObject {
+    @Published var rootFolder: FileItem = FileItem(from: "Root")!
     
     /// Create Folder in Folder
     /// - Parameters:

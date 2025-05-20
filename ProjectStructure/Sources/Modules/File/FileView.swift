@@ -75,7 +75,7 @@ struct FileView: View {
             switch item {
             case .subView:
                 if let file = viewModel.selectedFile {
-                    FileView(viewModel: .init(rootFile: file))
+                    FileView(viewModel: .init(rootFile: FileItem(from: file.url)))
                 } else {
                     EmptyView()
                 }
