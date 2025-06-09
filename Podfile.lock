@@ -1,3 +1,20 @@
-PODFILE CHECKSUM: fd524ecd80b48b382f7f940b38bc848868093619
+PODS:
+  - Alamofire (5.10.2)
+  - KeychainAccess (4.2.2)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.10)
+  - KeychainAccess (~> 4.2)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - KeychainAccess
+
+SPEC CHECKSUMS:
+  Alamofire: 7193b3b92c74a07f85569e1a6c4f4237291e7496
+  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
+
+PODFILE CHECKSUM: 44c18ad8beac0e41d7be2951ea754b0d25f7b4ff
 
 COCOAPODS: 1.16.2

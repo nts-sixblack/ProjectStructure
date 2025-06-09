@@ -6,5 +6,7 @@ target 'ProjectStructure' do
   use_frameworks!
 
   # Pods for ProjectStructure
+  pod 'Alamofire', '~> 5.10'
+  pod 'KeychainAccess', '~> 4.2'
 
 end

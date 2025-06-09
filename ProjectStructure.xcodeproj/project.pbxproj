@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AF0761072D0B3C7000FD6223 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = AF0761062D0B3C7000FD6223 /* KeychainAccess */; };
-		AFA096E82D5BA8B700AA0D28 /* EnvironmentOverrides in Frameworks */ = {isa = PBXBuildFile; productRef = AFA096E72D5BA8B700AA0D28 /* EnvironmentOverrides */; };
-		AFCA56352D09BBD200212B4E /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = AFCA56342D09BBD200212B4E /* SwiftUIIntrospect */; };
-		AFCA56412D09C2EA00212B4E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AFCA56402D09C2EA00212B4E /* Alamofire */; };
+		AF073AC32DF71A920077DB7B /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = AF073AC22DF71A920077DB7B /* SwiftUIIntrospect */; };
+		AF073AC52DF71A920077DB7B /* SwiftUIIntrospect-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = AF073AC42DF71A920077DB7B /* SwiftUIIntrospect-Dynamic */; };
+		AF073AC72DF71A920077DB7B /* SwiftUIIntrospect-Static in Frameworks */ = {isa = PBXBuildFile; productRef = AF073AC62DF71A920077DB7B /* SwiftUIIntrospect-Static */; };
+		AF073ACA2DF71A9A0077DB7B /* EnvironmentOverrides in Frameworks */ = {isa = PBXBuildFile; productRef = AF073AC92DF71A9A0077DB7B /* EnvironmentOverrides */; };
 		B17920C653A6A4132EBEF886 /* Pods_ProjectStructure.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 726C9C8EB14646C52B1B23EF /* Pods_ProjectStructure.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,11 +49,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFA096E82D5BA8B700AA0D28 /* EnvironmentOverrides in Frameworks */,
-				AFCA56352D09BBD200212B4E /* SwiftUIIntrospect in Frameworks */,
-				AFCA56412D09C2EA00212B4E /* Alamofire in Frameworks */,
-				AF0761072D0B3C7000FD6223 /* KeychainAccess in Frameworks */,
 				B17920C653A6A4132EBEF886 /* Pods_ProjectStructure.framework in Frameworks */,
+				AF073AC32DF71A920077DB7B /* SwiftUIIntrospect in Frameworks */,
+				AF073AC52DF71A920077DB7B /* SwiftUIIntrospect-Dynamic in Frameworks */,
+				AF073ACA2DF71A9A0077DB7B /* EnvironmentOverrides in Frameworks */,
+				AF073AC72DF71A920077DB7B /* SwiftUIIntrospect-Static in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +109,7 @@
 				AFB7AB162CEB790D007C8CD4 /* Frameworks */,
 				AFB7AB172CEB790D007C8CD4 /* Resources */,
 				AF2ECFAD2D809A520025B167 /* SwiftLint */,
+				CC25B5ACE2F03D609714D23E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -118,12 +119,6 @@
 				AFB7AB1B2CEB790D007C8CD4 /* ProjectStructure */,
 			);
 			name = ProjectStructure;
-			packageProductDependencies = (
-				AFCA56342D09BBD200212B4E /* SwiftUIIntrospect */,
-				AFCA56402D09C2EA00212B4E /* Alamofire */,
-				AF0761062D0B3C7000FD6223 /* KeychainAccess */,
-				AFA096E72D5BA8B700AA0D28 /* EnvironmentOverrides */,
-			);
 			productName = ProjectStructure;
 			productReference = AFB7AB192CEB790D007C8CD4 /* ProjectStructure.app */;
 			productType = "com.apple.product-type.application";
@@ -155,10 +150,8 @@
 			mainGroup = AFB7AB102CEB790D007C8CD4;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				AFCA56332D09BBD200212B4E /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
-				AFCA563F2D09C2EA00212B4E /* XCRemoteSwiftPackageReference "Alamofire" */,
-				AF0761052D0B3C7000FD6223 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
-				AFA096E62D5BA8B700AA0D28 /* XCRemoteSwiftPackageReference "EnvironmentOverrides" */,
+				AF073AC12DF71A920077DB7B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				AF073AC82DF71A9A0077DB7B /* XCRemoteSwiftPackageReference "EnvironmentOverrides" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AFB7AB1A2CEB790D007C8CD4 /* Products */;
@@ -198,6 +191,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\n#alias swiftlint=\"/opt/homebrew/bin/swiftlint\"\n\nswiftlint\n\n# Update a temporary file so that Xcode recognizes the process as completed\ntouch \"$DERIVED_FILE_DIR/swiftlint.timestamp\"\n";
+		};
+		CC25B5ACE2F03D609714D23E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ProjectStructure/Pods-ProjectStructure-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ProjectStructure/Pods-ProjectStructure-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ProjectStructure/Pods-ProjectStructure-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		F1340CCA422C5BE1016C3D16 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -568,23 +578,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		AF0761052D0B3C7000FD6223 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		AFA096E62D5BA8B700AA0D28 /* XCRemoteSwiftPackageReference "EnvironmentOverrides" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/nalexn/EnvironmentOverrides";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.4;
-			};
-		};
-		AFCA56332D09BBD200212B4E /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+		AF073AC12DF71A920077DB7B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
 			requirement = {
@@ -592,36 +586,36 @@
 				minimumVersion = 1.3.0;
 			};
 		};
-		AFCA563F2D09C2EA00212B4E /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+		AF073AC82DF71A9A0077DB7B /* XCRemoteSwiftPackageReference "EnvironmentOverrides" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire/";
+			repositoryURL = "https://github.com/nalexn/EnvironmentOverrides";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.10.2;
+				minimumVersion = 0.0.4;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		AF0761062D0B3C7000FD6223 /* KeychainAccess */ = {
+		AF073AC22DF71A920077DB7B /* SwiftUIIntrospect */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AF0761052D0B3C7000FD6223 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
-			productName = KeychainAccess;
-		};
-		AFA096E72D5BA8B700AA0D28 /* EnvironmentOverrides */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AFA096E62D5BA8B700AA0D28 /* XCRemoteSwiftPackageReference "EnvironmentOverrides" */;
-			productName = EnvironmentOverrides;
-		};
-		AFCA56342D09BBD200212B4E /* SwiftUIIntrospect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AFCA56332D09BBD200212B4E /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			package = AF073AC12DF71A920077DB7B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = SwiftUIIntrospect;
 		};
-		AFCA56402D09C2EA00212B4E /* Alamofire */ = {
+		AF073AC42DF71A920077DB7B /* SwiftUIIntrospect-Dynamic */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = AFCA563F2D09C2EA00212B4E /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
+			package = AF073AC12DF71A920077DB7B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = "SwiftUIIntrospect-Dynamic";
+		};
+		AF073AC62DF71A920077DB7B /* SwiftUIIntrospect-Static */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF073AC12DF71A920077DB7B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = "SwiftUIIntrospect-Static";
+		};
+		AF073AC92DF71A9A0077DB7B /* EnvironmentOverrides */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF073AC82DF71A9A0077DB7B /* XCRemoteSwiftPackageReference "EnvironmentOverrides" */;
+			productName = EnvironmentOverrides;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
