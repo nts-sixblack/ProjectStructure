@@ -152,6 +152,8 @@ The app follows Clean Architecture principles:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/nts-sixblack/ProjectStructure)
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details 
